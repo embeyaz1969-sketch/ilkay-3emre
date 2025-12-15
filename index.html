@@ -8,76 +8,60 @@
 body {
   margin: 0;
   height: 100vh;
-  background: url("IMG-20251117-WA0008.jpg") no-repeat center center/cover;
-  font-family: 'Segoe UI', sans-serif;
+  background-image: url("IMG-20251117-WA0008.jpg");
+  background-size: cover;
+  background-position: center;
+  font-family: Arial, Helvetica, sans-serif;
   overflow: hidden;
 }
 
-/* Arka plan blur */
 .overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0,0,0,0.45);
   backdrop-filter: blur(4px);
 }
 
-/* Kart */
 .card {
   position: relative;
   z-index: 2;
   background: rgba(255,255,255,0.9);
-  padding: 35px;
+  padding: 30px;
   border-radius: 25px;
   text-align: center;
-  max-width: 90%;
+  width: 85%;
+  max-width: 360px;
   margin: auto;
   top: 50%;
   transform: translateY(-50%);
-  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-  animation: fadeIn 2s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
 }
 
 h1 {
-  font-size: 26px;
   color: #c9184a;
-  min-height: 80px;
-}
-
-p {
-  font-size: 20px;
-  margin: 15px 0 25px;
+  min-height: 90px;
 }
 
 button {
-  background: linear-gradient(45deg, #ff4d6d, #ff758f);
+  background: #ff4d6d;
   color: white;
   border: none;
-  padding: 14px 30px;
+  padding: 14px 28px;
   font-size: 18px;
   border-radius: 30px;
   cursor: pointer;
 }
 
-button:hover {
-  transform: scale(1.05);
-}
-
-/* Kalpler */
 .heart {
-  position: absolute;
+  position: fixed;
+  bottom: -20px;
   color: #ff4d6d;
-  font-size: 20px;
-  animation: float 6s linear infinite;
+  animation: rise 6s linear forwards;
 }
 
-@keyframes float {
-  0% { transform: translateY(100vh) scale(0.8); opacity: 1; }
-  100% { transform: translateY(-10vh) scale(1.4); opacity: 0; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(-40%) scale(0.9); }
-  to { opacity: 1; transform: translateY(-50%) scale(1); }
+@keyframes rise {
+  from { transform: translateY(0); opacity: 1; }
+  to { transform: translateY(-120vh); opacity: 0; }
 }
 </style>
 </head>
@@ -87,35 +71,45 @@ button:hover {
 <div class="overlay"></div>
 
 <div class="card">
-  <h1 id="type"></h1>
-
+  <h1 id="text"></h1>
   <p>İlkay 🤍 Emre</p>
-
-  <button onclick="start()">🎶 İlkay’a Özel</button>
-
-  <audio id="music" src="senden-daha-guzel.mp3"></audio>
+  <button onclick="startMusic()">🎶 İlkay’a Özel</button>
 </div>
 
+<audio id="music" preload="auto">
+  <source src="senden-daha-guzel.mp3" type="audio/mpeg">
+</audio>
+
 <script>
-/* Yazı yazma animasyonu */
-const text = "DOĞUM GÜNÜN KUTLU OLSUN SEVGİLİM 🥰😘";
-let i = 0;
-function typeWriter() {
-  if (i < text.length) {
-    document.getElementById("type").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeWriter, 80);
+const message = "DOGUM GUNUN KUTLU OLSUN SEVGILIM";
+let index = 0;
+
+function typeText() {
+  if (index < message.length) {
+    document.getElementById("text").innerHTML += message.charAt(index);
+    index++;
+    setTimeout(typeText, 80);
   }
 }
-typeWriter();
 
-/* Müzik + kalpler */
-function start() {
-  document.getElementById("music").play();
-  setInterval(createHeart, 400);
+window.onload = typeText;
+
+function startMusic() {
+  const music = document.getElementById("music");
+  music.play();
+  setInterval(createHeart, 500);
 }
 
-/* Kalp oluşturma */
 function createHeart() {
   const heart = document.createElement("div");
   heart.className = "heart";
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (16 + Math.random() * 24) + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+</script>
+
+</body>
+</html>
