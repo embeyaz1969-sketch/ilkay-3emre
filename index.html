@@ -8,106 +8,53 @@
 body {
   margin: 0;
   height: 100vh;
-  background-image: url("IMG-20251117-WA0008.jpg");
-  background-size: cover;
-  background-position: center;
-  font-family: Arial, Helvetica, sans-serif;
-  overflow: hidden;
+  background: url("IMG-20251117-WA0008.jpg") no-repeat center center / cover;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-  backdrop-filter: blur(4px);
-}
-
-.card {
-  position: relative;
-  z-index: 2;
+.box {
   background: rgba(255,255,255,0.9);
-  padding: 30px;
-  border-radius: 25px;
+  padding: 25px;
+  border-radius: 20px;
   text-align: center;
   width: 85%;
-  max-width: 360px;
-  margin: auto;
-  top: 50%;
-  transform: translateY(-50%);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  max-width: 350px;
 }
 
 h1 {
-  color: #c9184a;
-  min-height: 90px;
+  color: #d6336c;
+  font-size: 22px;
 }
 
 button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
   background: #ff4d6d;
   color: white;
-  border: none;
-  padding: 14px 28px;
-  font-size: 18px;
-  border-radius: 30px;
-  cursor: pointer;
-}
-
-.heart {
-  position: fixed;
-  bottom: -20px;
-  color: #ff4d6d;
-  animation: rise 6s linear forwards;
-}
-
-@keyframes rise {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-120vh); opacity: 0; }
 }
 </style>
 </head>
 
 <body>
 
-<div class="overlay"></div>
-
-<div class="card">
-  <h1 id="text"></h1>
+<div class="box">
+  <h1>DOĞUM GÜNÜN KUTLU OLSUN<br>SEVGİLİM 🥰😘</h1>
   <p>İlkay 🤍 Emre</p>
-  <button onclick="startMusic()">🎶 İlkay’a Özel</button>
+
+  <button onclick="playMusic()">🎶 Müziği Başlat</button>
 </div>
 
-<audio id="music" preload="auto">
-  <source src="senden-daha-guzel.mp3" type="audio/mpeg">
-</audio>
+<audio id="music" src="senden-daha-guzel.mp3"></audio>
 
 <script>
-const message = "DOGUM GUNUN KUTLU OLSUN SEVGILIM";
-let index = 0;
-
-function typeText() {
-  if (index < message.length) {
-    document.getElementById("text").innerHTML += message.charAt(index);
-    index++;
-    setTimeout(typeText, 80);
-  }
-}
-
-window.onload = typeText;
-
-function startMusic() {
-  const music = document.getElementById("music");
-  music.play();
-  setInterval(createHeart, 500);
-}
-
-function createHeart() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (16 + Math.random() * 24) + "px";
-  document.body.appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
+function playMusic() {
+  document.getElementById("music").play();
 }
 </script>
 
