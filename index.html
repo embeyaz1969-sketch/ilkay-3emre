@@ -2,9 +2,13 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<title>İlkay Emre</title>
+<title>Ilkay Emre</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -16,37 +20,41 @@ body {
   align-items: center;
 }
 
+/* BLUR OVERLAY */
 .overlay {
   position: fixed;
   inset: 0;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   background: rgba(0,0,0,0.35);
   z-index: 1;
 }
 
+/* MAIN CARD */
 .card {
   position: relative;
   z-index: 2;
-  background: rgba(255,255,255,0.9);
-  padding: 40px;
-  border-radius: 28px;
+  background: rgba(255,255,255,0.92);
+  padding: 42px;
+  border-radius: 30px;
   text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.4);
   animation: fadeIn 2s ease;
 }
 
 h1 {
   color: #e91e63;
   font-size: 28px;
+  margin-bottom: 10px;
 }
 
 p {
   font-size: 20px;
+  margin: 10px 0;
 }
 
 button {
   margin-top: 20px;
-  padding: 14px 30px;
+  padding: 14px 34px;
   font-size: 18px;
   border: none;
   border-radius: 30px;
@@ -55,24 +63,38 @@ button {
   cursor: pointer;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
-
+/* FLYING TEXT */
 .fly {
   position: fixed;
   bottom: -40px;
-  color: #ff4d6d;
   font-size: 18px;
   font-weight: bold;
+  color: #ff4d6d;
   animation: flyUp 10s linear forwards;
-  z-index: 0;
+  z-index: 3; /* IMPORTANT */
+  pointer-events: none;
 }
 
 @keyframes flyUp {
-  from { transform: translateY(0); opacity: 1; }
-  to { transform: translateY(-120vh); opacity: 0; }
+  from {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-120vh) scale(0.8);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 </style>
 </head>
@@ -82,26 +104,26 @@ button {
 <div class="overlay"></div>
 
 <div class="card">
-  <h1>DOĞUM GÜNÜN KUTLU OLSUN SEVGİLİM 🥰😘</h1>
-  <p>İlkay ❤️ Emre</p>
-  <button onclick="start()">Muzigi Baslat</button>
+  <h1>DOGUM GUNUN KUTLU OLSUN SEVGILIM 🥰😘</h1>
+  <p>Ilkay ❤️ Emre</p>
+  <button onclick="startMusic()">Muzigi Baslat</button>
 </div>
 
 <audio id="music" src="senden-daha-guzel.mp3" preload="auto"></audio>
 
 <script>
-function start() {
+function startMusic() {
   var audio = document.getElementById("music");
   audio.play();
 
-  setInterval(function () {
+  setInterval(function() {
     var el = document.createElement("div");
     el.className = "fly";
-    el.innerText = "İlkay ❤️ Emre";
+    el.innerText = "Ilkay ❤️ Emre";
     el.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(el);
 
-    setTimeout(function () {
+    setTimeout(function() {
       el.remove();
     }, 10000);
   }, 500);
