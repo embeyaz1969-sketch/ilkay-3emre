@@ -8,55 +8,93 @@
 body {
   margin: 0;
   height: 100vh;
-  background: url("IMG-20251117-WA0008.jpg") no-repeat center center / cover;
-  font-family: Arial, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow: hidden;
+  background: url("IMG-20251117-WA0008.jpg") no-repeat center/cover;
+  font-family: 'Segoe UI', sans-serif;
 }
 
-.box {
-  background: rgba(255,255,255,0.9);
-  padding: 25px;
-  border-radius: 20px;
+.overlay {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(0,0,0,0.3);
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255,255,255,0.85);
+  padding: 50px;
+  border-radius: 30px;
   text-align: center;
-  width: 85%;
-  max-width: 350px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  animation: fadeIn 2s ease;
 }
 
 h1 {
-  color: #d6336c;
-  font-size: 22px;
+  color: #e91e63;
+  font-size: 32px;
+}
+
+p {
+  font-size: 20px;
 }
 
 button {
   margin-top: 20px;
-  padding: 12px 25px;
+  padding: 12px 30px;
   font-size: 18px;
   border: none;
   border-radius: 25px;
-  background: #ff4d6d;
+  background: #e91e63;
   color: white;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* KALPLER */
+.heart {
+  position: absolute;
+  color: #ff4d6d;
+  font-size: 20px;
+  animation: float 8s linear infinite;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(100vh);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="box">
-  <h1>DOĞUM GÜNÜN KUTLU OLSUN<br>SEVGİLİM 🥰😘</h1>
-  <p>İlkay 🤍 Emre</p>
+<div class="overlay"></div>
 
-  <button onclick="playMusic()">🎶 Müziği Başlat</button>
+<div class="card">
+  <h1>DOĞUM GÜNÜN KUTLU OLSUN SEVGİLİM 🥰😘</h1>
+  <p>İlkay 🤍 Emre</p>
+  <button onclick="playMusic()">Müziği Başlat 🎶</button>
 </div>
 
-<audio id="music" src="senden-daha-guzel.mp3"></audio>
+<audio id="music" src="muzik.mp3"></audio>
 
 <script>
 function playMusic() {
   document.getElementById("music").play();
 }
-</script>
 
-</body>
-</html>
+// Kalp üretici
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart
