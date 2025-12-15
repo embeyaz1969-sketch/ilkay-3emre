@@ -11,13 +11,18 @@ body {
   overflow: hidden;
   background: url("IMG-20251117-WA0008.jpg") no-repeat center/cover;
   font-family: 'Segoe UI', sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
   inset: 0;
   backdrop-filter: blur(8px);
   background: rgba(0,0,0,0.3);
+  z-index: 1;
 }
 
 .card {
@@ -42,10 +47,10 @@ p {
 
 button {
   margin-top: 20px;
-  padding: 12px 30px;
+  padding: 14px 32px;
   font-size: 18px;
   border: none;
-  border-radius: 25px;
+  border-radius: 30px;
   background: #e91e63;
   color: white;
   cursor: pointer;
@@ -56,21 +61,24 @@ button {
   to { opacity: 1; transform: scale(1); }
 }
 
-/* KALPLER */
-.heart {
-  position: absolute;
+/* UÇUŞAN YAZILAR */
+.fly {
+  position: fixed;
+  bottom: -40px;
   color: #ff4d6d;
-  font-size: 20px;
-  animation: float 8s linear infinite;
+  font-size: 18px;
+  font-weight: bold;
+  animation: flyUp 10s linear forwards;
+  z-index: 0;
 }
 
-@keyframes float {
+@keyframes flyUp {
   from {
-    transform: translateY(100vh);
+    transform: translateY(0);
     opacity: 1;
   }
   to {
-    transform: translateY(-10vh);
+    transform: translateY(-110vh);
     opacity: 0;
   }
 }
@@ -84,27 +92,27 @@ button {
 <div class="card">
   <h1>DOĞUM GÜNÜN KUTLU OLSUN SEVGİLİM 🥰😘</h1>
   <p>İlkay 🤍 Emre</p>
-  <button onclick="playMusic()">Müziği Başlat 🎶</button>
+  <button onclick="start()">Müziği Başlat 🎶</button>
 </div>
 
-<audio id="music" src="muzik.mp3"></audio>
+<audio id="music" src="muzik.mp3" preload="auto"></audio>
 
 <script>
-function playMusic() {
-  document.getElementById("music").play();
+function start() {
+  const music = document.getElementById("music");
+  music.play().catch(() => alert("Müziği başlatmak için tekrar dokun 💙"));
+
+  setInterval(() => {
+    const text = document.createElement("div");
+    text.className = "fly";
+    text.innerText = "İlkay ❤️ Emre";
+    text.style.left = Math.random() * 100 + "vw";
+    text.style.fontSize = (16 + Math.random() * 10) + "px";
+    document.body.appendChild(text);
+
+    setTimeout(() => text.remove(), 10000);
+  }, 500);
 }
-
-// Kalp üretici
-setInterval(() => {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.innerHTML = "❤";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.fontSize = (15 + Math.random()*20) + "px";
-  document.body.appendChild(heart);
-
-  setTimeout(() => heart.remove(), 8000);
-}, 400);
 </script>
 
 </body>
