@@ -1,72 +1,79 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>İlkay 🤍 Emre</title>
-<style>
-body {
-    margin: 0;
-    height: 100vh;
-    background:
-      linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
-      url('IMG-20251117-WA0008.jpg') no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Segoe UI', sans-serif;
-}
-.card {
-    background: rgba(255,255,255,0.85);
-    padding: 40px;
-    border-radius: 25px;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-    animation: fadeIn 2s ease;
-}
-h1 {
-    font-size: 36px;
-    color: #c9184a;
-}
-p {
-    font-size: 20px;
-    margin: 15px 0;
-}
-button {
-    margin-top: 20px;
-    padding: 15px 30px;
-    font-size: 18px;
-    border: none;
-    border-radius: 30px;
-    background: #c9184a;
-    color: white;
-    cursor: pointer;
-}
-button:hover {
-    background: #a4133c;
-}
-@keyframes fadeIn {
-    from {opacity: 0; transform: scale(0.9);}
-    to {opacity: 1; transform: scale(1);}
-}
-</style>
+  <meta charset="UTF-8">
+  <title>İlkay 🤍 Emre</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: url("IMG-20251117-WA0008.jpg") no-repeat center center/cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.85);
+      padding: 40px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease;
+      max-width: 90%;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      background: #ff4d6d;
+      color: white;
+      border: none;
+      padding: 14px 30px;
+      font-size: 18px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #e63950;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="card">
+  <div class="card">
     <h1>İlkay 🤍 Emre</h1>
-    <p>Sevgilim, seni çok seviyorum 🤍</p>
+    <p>İlkay sevgilim, seni çok seviyorum 💖</p>
 
     <button onclick="playMusic()">🎶 İlkay’a Özel</button>
 
-    <iframe id="music" width="0" height="0" allow="autoplay"></iframe>
-</div>
+    <audio id="music">
+      <source src="https://www.mboxdrive.com/Duman%20-%20Senden%20Daha%20G%C3%BCzel.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
-<script>
-function playMusic() {
-  document.getElementById("music").src =
-  "https://www.youtube.com/embed/1xk8N6p5FfM?autoplay=1";
-}
-</script>
+  <script>
+    function playMusic() {
+      document.getElementById("music").play();
+    }
+  </script>
 
 </body>
 </html>
