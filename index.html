@@ -158,7 +158,6 @@ button {
   <button onclick="startAll()">👉🏻🤍🫆🤍👈🏻</button>
 </div>
 
-<!-- KART ALTI ROMANTİK YAZILAR -->
 <div class="romantic-text" id="romanticText"></div>
 
 <audio id="music" src="senden-daha-guzel.mp3"></audio>
@@ -176,7 +175,6 @@ function startAll() {
   if (started) return;
   started = true;
 
-  // Müzik başlat
   document.getElementById("music").play();
 
   // Uçan yazılar
@@ -193,7 +191,7 @@ function startAll() {
   setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
-    h.innerText = "🤍İYİ Kİ DOĞDUN SEVGİLİM🤍";
+    h.innerText = "🤍";
     h.style.left = Math.random() * 100 + "vw";
     h.style.fontSize = 12 + Math.random()*14 + "px";
     document.body.appendChild(h);
@@ -207,23 +205,24 @@ function startAll() {
 function startRomanticText() {
   const box = document.getElementById("romanticText");
   let i = 0;
-  box.style.opacity = 1;
 
   const interval = setInterval(() => {
-    if (i === romanticLines.length - 1) {
+    if(i === romanticLines.length - 1) {
       // Son cümle
       box.innerHTML = `<div class="romantic-line big-final">${romanticLines[i]}</div>`;
-      // Kart etrafından kalpler
       startCardHearts();
       clearInterval(interval);
       return;
     }
     box.innerHTML = `<div class="romantic-line">${romanticLines[i]}</div>`;
+    // Cümle görünür yap
+    const line = box.querySelector(".romantic-line");
+    line.style.opacity = 1;
     i++;
   }, 3000);
 }
 
-// Son cümle için kart etrafından uçan kalpler
+// Kart etrafında kalpler (son cümle)
 function startCardHearts() {
   const card = document.querySelector('.card');
   let count = 0;
@@ -234,14 +233,13 @@ function startCardHearts() {
     const rect = card.getBoundingClientRect();
     h.style.left = rect.left + Math.random() * rect.width + 'px';
     h.style.top = rect.top + Math.random() * rect.height + 'px';
-    h.style.fontSize = 16 + Math.random()*14 + 'px';
+    h.style.fontSize = 16 + Math.random()*14 + "px";
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 4000);
     count++;
-    if(count>20) clearInterval(cardInterval);
+    if(count>25) clearInterval(cardInterval);
   }, 200);
 }
 </script>
-
 </body>
 </html>
