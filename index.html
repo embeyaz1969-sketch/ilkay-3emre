@@ -88,32 +88,43 @@ button {
   cursor: pointer;
 }
 
-/* KART ALTI ROMANTİK YAZI */
+/* 🌸 KART ALTI ROMANTİK YAZILAR (TÜM CÜMLELER) */
 .romantic-text {
-  margin-top: 20px;
+  margin-top: 22px;
   text-align: center;
-  font-size: 18px;
+  font-size: 22px;  /* tüm cümleler büyük */
   color: #e91e63;
   opacity: 0;
   transition: opacity 0.6s ease;
+  text-shadow:
+    0 0 10px rgba(255,105,180,0.8),
+    0 0 18px rgba(255,182,193,0.9);
   z-index: 2;
 }
 
-/* SON PARLAK YAZI */
+/* 🌟 SON CÜMLE – EXTRA GÖSTERİŞLİ */
 .big-final {
-  margin-top: 12px;
-  font-size: 28px;
+  margin-top: 14px;
+  font-size: 32px;
   font-weight: bold;
-  color: #e91e63;
+  color: #ff2f92;
   text-shadow:
-    0 0 12px rgba(255,105,180,0.9),
-    0 0 25px rgba(255,182,193,1);
-  animation: glow 1.5s infinite alternate;
+    0 0 15px rgba(255,105,180,1),
+    0 0 30px rgba(255,182,193,1),
+    0 0 45px rgba(255,105,180,0.9);
+  animation: megaGlow 1.6s infinite alternate;
 }
 
-@keyframes glow {
-  from { opacity: 0.7; }
-  to   { opacity: 1; }
+/* Nabız + parlama */
+@keyframes megaGlow {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
 }
 
 /* UÇAN YAZI */
@@ -156,7 +167,7 @@ button {
   <button onclick="startAll()">👉🏻🤍🫆🤍👈🏻</button>
 </div>
 
-<!-- KART ALTI YAZILAR -->
+<!-- KART ALTI ROMANTİK YAZILAR -->
 <div class="romantic-text" id="romanticText"></div>
 
 <audio id="music" src="senden-daha-guzel.mp3"></audio>
@@ -175,7 +186,6 @@ function startAll() {
   if (started) return;
   started = true;
 
-  // MÜZİK
   document.getElementById("music").play();
 
   // UÇAN YAZILAR
@@ -209,12 +219,12 @@ function startRomanticText() {
 
   const interval = setInterval(() => {
     if (i === romanticLines.length - 1) {
-      box.innerHTML = `<div class="big-final">${romanticLines[i]}</div>`;
+      box.innerHTML = `<div class="romantic-line big-final">${romanticLines[i]}</div>`;
       clearInterval(interval);
       return;
     }
 
-    box.innerText = romanticLines[i];
+    box.innerHTML = `<div class="romantic-line">${romanticLines[i]}</div>`;
     i++;
   }, 3000);
 }
