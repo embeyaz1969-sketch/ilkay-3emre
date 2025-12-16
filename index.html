@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Ilkay Emre</title>
-
 <style>
 * { box-sizing: border-box; }
 
@@ -88,24 +87,23 @@ button {
   cursor: pointer;
 }
 
-/* 🌸 KART ALTI ROMANTİK YAZILAR (TÜM CÜMLELER) */
-.romantic-text {
-  margin-top: 22px;
-  text-align: center;
-  font-size: 22px;  /* tüm cümleler büyük */
+/* 🌸 ROMANTİK YAZILAR */
+.romantic-line {
+  font-size: 28px; /* tüm cümleler büyük ve parlak */
   color: #e91e63;
+  text-align: center;
+  margin-top: 18px;
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.8s ease;
   text-shadow:
     0 0 10px rgba(255,105,180,0.8),
     0 0 18px rgba(255,182,193,0.9);
   z-index: 2;
 }
 
-/* 🌟 SON CÜMLE – EXTRA GÖSTERİŞLİ */
+/* 🌟 SON CÜMLE */
 .big-final {
-  margin-top: 14px;
-  font-size: 32px;
+  font-size: 38px;
   font-weight: bold;
   color: #ff2f92;
   text-shadow:
@@ -115,16 +113,9 @@ button {
   animation: megaGlow 1.6s infinite alternate;
 }
 
-/* Nabız + parlama */
 @keyframes megaGlow {
-  0% {
-    transform: scale(1);
-    opacity: 0.85;
-  }
-  100% {
-    transform: scale(1.06);
-    opacity: 1;
-  }
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(1.06); opacity: 1; }
 }
 
 /* UÇAN YAZI */
@@ -174,7 +165,6 @@ button {
 
 <script>
 let started = false;
-
 const romanticLines = [
   "Seni sevmek, her gün biraz daha bağlanmak gibi.",
   "Gözlerine bakınca dünya sakinleşiyor.",
@@ -186,9 +176,10 @@ function startAll() {
   if (started) return;
   started = true;
 
+  // Müzik başlat
   document.getElementById("music").play();
 
-  // UÇAN YAZILAR
+  // Uçan yazılar
   setInterval(() => {
     const t = document.createElement("div");
     t.className = "fly";
@@ -198,7 +189,7 @@ function startAll() {
     setTimeout(() => t.remove(), 8000);
   }, 800);
 
-  // UÇAN KALPLER
+  // Uçan kalpler
   setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
@@ -209,6 +200,7 @@ function startAll() {
     setTimeout(() => h.remove(), 10000);
   }, 600);
 
+  // Romantik yazılar
   startRomanticText();
 }
 
@@ -219,14 +211,35 @@ function startRomanticText() {
 
   const interval = setInterval(() => {
     if (i === romanticLines.length - 1) {
+      // Son cümle
       box.innerHTML = `<div class="romantic-line big-final">${romanticLines[i]}</div>`;
+      // Kart etrafından kalpler
+      startCardHearts();
       clearInterval(interval);
       return;
     }
-
     box.innerHTML = `<div class="romantic-line">${romanticLines[i]}</div>`;
     i++;
   }, 3000);
+}
+
+// Son cümle için kart etrafından uçan kalpler
+function startCardHearts() {
+  const card = document.querySelector('.card');
+  let count = 0;
+  const cardInterval = setInterval(() => {
+    const h = document.createElement('div');
+    h.className = 'heart';
+    h.innerText = '💖';
+    const rect = card.getBoundingClientRect();
+    h.style.left = rect.left + Math.random() * rect.width + 'px';
+    h.style.top = rect.top + Math.random() * rect.height + 'px';
+    h.style.fontSize = 16 + Math.random()*14 + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 4000);
+    count++;
+    if(count>20) clearInterval(cardInterval);
+  }, 200);
 }
 </script>
 
