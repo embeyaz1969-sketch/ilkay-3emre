@@ -13,11 +13,14 @@ body {
   margin: 0;
   height: 100vh;
   overflow: hidden;
-  background: url("IMG-20251117-WA0008.jpg") no-repeat center/cover;
   font-family: Arial, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
+  /* Arka plan: resim + mavi degrade */
+  background: 
+    linear-gradient(rgba(0, 50, 200, 0.5), rgba(0, 123, 255, 0.5)),
+    url("IMG-20251117-WA0008.jpg") no-repeat center/cover;
 }
 
 /* BLUR OVERLAY */
@@ -25,7 +28,7 @@ body {
   position: fixed;
   inset: 0;
   backdrop-filter: blur(12px);
-  background: rgba(0,0,0,0.35);
+  background: rgba(0,0,50,0.25); /* Hafif mavi ton overlay */
   z-index: 1;
 }
 
@@ -33,7 +36,7 @@ body {
 .card {
   position: relative;
   z-index: 2;
-  background: rgba(255,255,255,0.92);
+  background: rgba(0, 123, 255, 0.85); /* Şeffaf mavi kart */
   padding: 42px;
   border-radius: 30px;
   text-align: center;
@@ -42,7 +45,7 @@ body {
 }
 
 h1 {
-  color: #e91e63;
+  color: #fff; /* Beyaz yazı */
   font-size: 28px;
   margin-bottom: 10px;
 }
@@ -50,6 +53,7 @@ h1 {
 p {
   font-size: 20px;
   margin: 10px 0;
+  color: #f0f0f0; /* Açık yazı */
 }
 
 button {
@@ -58,9 +62,14 @@ button {
   font-size: 18px;
   border: none;
   border-radius: 30px;
-  background: #e91e63;
-  color: blue;
+  background: #0056b3; /* Koyu mavi buton */
+  color: #fff;
   cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.1);
+  transition: 0.3s ease;
 }
 
 /* FLYING TEXT */
@@ -69,9 +78,9 @@ button {
   bottom: -40px;
   font-size: 18px;
   font-weight: bold;
-  color: #ff4d6d;
+  color: #a0eaff; /* Açık mavi ton */
   animation: flyUp 10s linear forwards;
-  z-index: 3; /* IMPORTANT */
+  z-index: 3; 
   pointer-events: none;
 }
 
@@ -104,8 +113,7 @@ button {
 <div class="overlay"></div>
 
 <div class="card">
-  <h1>❤️❤️İYİ Kİ DOĞDUN SEVGİLİM❤️❤️
-  </h1>
+  <h1>❤️❤️İYİ Kİ DOĞDUN SEVGİLİM❤️❤️</h1>
   <p>İlkay ❤️ Emre</p>
   <button onclick="startMusic()">🤍İ🤍E🤍</button>
 </div>
@@ -113,11 +121,13 @@ button {
 <audio id="music" src="senden-daha-guzel.mp3" preload="auto"></audio>
 
 <script>
+let interval;
 function startMusic() {
   var audio = document.getElementById("music");
-  audio.play();
+  audio.play().catch(e => console.log("Müzik çalınamadı:", e));
 
-  setInterval(function() {
+  if (interval) return;
+  interval = setInterval(function() {
     var el = document.createElement("div");
     el.className = "fly";
     el.innerText = "İlkay ❤️ Emre";
@@ -127,7 +137,7 @@ function startMusic() {
     setTimeout(function() {
       el.remove();
     }, 10000);
-  }, 500);
+  }, 700);
 }
 </script>
 
