@@ -20,7 +20,7 @@ body {
     url("IMG-20251117-WA0008.jpg") no-repeat center/cover;
 }
 
-/* Hafif blur */
+/* Hafif blur arka plan */
 .overlay {
   position: fixed;
   inset: 0;
@@ -93,7 +93,6 @@ button {
   color: #e91e63;
   text-align: center;
   margin-top: 18px;
-  opacity: 1; /* görünür yapıldı */
   text-shadow:
     0 0 10px rgba(255,105,180,0.8),
     0 0 18px rgba(255,182,193,0.9);
@@ -190,7 +189,7 @@ function startAll() {
   setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
-    h.innerText = "🤍";
+    h.innerText = "🤍İYİ Kİ DOĞDUN SEVGİLİM🤍";
     h.style.left = Math.random() * 100 + "vw";
     h.style.fontSize = 12 + Math.random()*14 + "px";
     document.body.appendChild(h);
@@ -206,15 +205,22 @@ function startRomanticText() {
   let i = 0;
 
   const interval = setInterval(() => {
+    // Son cümle
     if(i === romanticLines.length - 1) {
-      // Son cümle
-      box.innerHTML = `<div class="romantic-line big-final">${romanticLines[i]}</div>`;
-      // Kart etrafından kalpler sonsuz
-      startCardHeartsInfinite();
+      const lastDiv = document.createElement("div");
+      lastDiv.className = "romantic-line big-final";
+      lastDiv.innerHTML = romanticLines[i];
+      box.appendChild(lastDiv);
+      startCardHeartsInfinite(); // kart etrafı kalpler sürekli
       clearInterval(interval);
       return;
     }
-    box.innerHTML = `<div class="romantic-line">${romanticLines[i]}</div>`;
+
+    // Diğer cümleler
+    const div = document.createElement("div");
+    div.className = "romantic-line";
+    div.innerHTML = romanticLines[i];
+    box.appendChild(div);
     i++;
   }, 3000);
 }
