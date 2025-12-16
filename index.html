@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Ilkay Emre</title>
+
 <style>
 * { box-sizing: border-box; }
 
@@ -14,43 +15,43 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Arka plan: resim + pembe degrade */
-  background: 
-    linear-gradient(to bottom, rgba(255,105,180,0.5), rgba(255,182,193,0.5)),
+  background:
+    linear-gradient(rgba(255,182,193,0.25), rgba(255,182,193,0.25)),
     url("IMG-20251117-WA0008.jpg") no-repeat center/cover;
 }
 
-/* BLUR OVERLAY */
+/* Hafif blur */
 .overlay {
   position: fixed;
   inset: 0;
-  backdrop-filter: blur(12px);
-  background: rgba(255,105,180,0.25);
+  backdrop-filter: blur(8px);
+  background: rgba(255,182,193,0.15);
   z-index: 1;
 }
 
-/* MAIN CARD */
+/* KART */
 .card {
   position: relative;
   z-index: 2;
-  background: rgba(255,105,180,0.85); /* Yoğun pembe */
-  padding: 42px;
+  background: rgba(255,255,255,0.9);
+  padding: 45px;
   border-radius: 30px;
   text-align: center;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
-h1 {
-  color: #fff;
-  font-size: 28px;
-  margin-bottom: 10px;
+/* Kart kalpleri */
+.card::before,
+.card::after {
+  content: "❤️";
+  position: absolute;
+  font-size: 26px;
 }
+.card::before { top: 15px; left: 15px; }
+.card::after  { top: 15px; right: 15px; }
 
-p {
-  font-size: 20px;
-  margin: 10px 0;
-  color: #ffe4e1;
-}
+h1 { color: #e91e63; }
+p  { font-size: 20px; }
 
 button {
   margin-top: 20px;
@@ -58,100 +59,85 @@ button {
   font-size: 18px;
   border: none;
   border-radius: 30px;
-  background: #ff69b4; /* Pembe buton */
-  color: #fff;
+  background: #ff69b4;
+  color: white;
   cursor: pointer;
-  transition: 0.3s ease;
 }
 
-button:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255,105,180,0.7), 0 0 40px rgba(255,182,193,0.5);
-}
-
-/* FLYING TEXT */
+/* UÇAN YAZI */
 .fly {
   position: fixed;
   bottom: -40px;
   font-size: 18px;
   font-weight: bold;
-  background: linear-gradient(45deg, #ff69b4, #ffb6c1);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: flyUp 10s linear forwards, floatScale 2s ease-in-out infinite alternate;
-  z-index: 3;
+  color: #ff1493;
+  animation: flyUp 8s linear forwards;
   pointer-events: none;
+  z-index: 3;
 }
 
 @keyframes flyUp {
-  from { transform: translateY(0) scale(1); opacity:1; }
-  to { transform: translateY(-120vh) scale(0.8); opacity:0; }
+  from { transform: translateY(0); opacity: 1; }
+  to   { transform: translateY(-120vh); opacity: 0; }
 }
 
-@keyframes floatScale {
-  from { transform: translateY(0) scale(1); }
-  to { transform: translateY(-10px) scale(1.1); }
-}
-
-/* FLYING HEARTS */
+/* UÇAN KALP */
 .heart {
   position: fixed;
-  font-size: 12px;
+  bottom: -20px;
+  font-size: 16px;
+  color: #ff69b4;
+  animation: flyUp 10s linear forwards;
   pointer-events: none;
   z-index: 2;
-  user-select: none;
-  color: #ff69b4;
 }
 </style>
 </head>
+
 <body>
 
 <div class="overlay"></div>
 
 <div class="card">
-  <h1>❤️❤️İYİ Kİ DOĞDUN SEVGİLİM❤️❤️</h1>
+  <h1>❤️ İYİ Kİ DOĞDUN SEVGİLİM ❤️</h1>
   <p>İlkay ❤️ Emre</p>
-  <button onclick="startMusic()">🤍İ🤍E🤍</button>
+  <button onclick="startAll()">🤍İ🤍E🤍</button>
 </div>
 
-<audio id="music" src="senden-daha-guzel.mp3" preload="auto"></audio>
+<audio id="music" src="senden-daha-guzel.mp3"></audio>
 
 <script>
-let interval;
-function startMusic() {
-  var audio = document.getElementById("music");
-  audio.play().catch(e => console.log("Müzik çalınamadı:", e));
+let started = false;
 
-  if (interval) return;
-  interval = setInterval(function() {
-    var el = document.createElement("div");
-    el.className = "fly";
-    el.innerText = "İlkay ❤️ Emre";
-    el.style.left = Math.random() * 100 + "vw";
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 10000);
-  }, 700);
+function startAll() {
+  if (started) return;
+  started = true;
+
+  // MÜZİK
+  document.getElementById("music").play();
+
+  // UÇAN YAZILAR
+  setInterval(() => {
+    const t = document.createElement("div");
+    t.className = "fly";
+    t.innerText = "İlkay ❤️ Emre";
+    t.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 8000);
+  }, 800);
+
+  // UÇAN KALPLER
+  setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "❤️";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = 12 + Math.random()*14 + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 10000);
+  }, 600);
 }
+</script>
 
-// UÇAN KALPLER
-function createHearts() {
-  const heart = document.createElement('div');
-  heart.className = 'heart';
-  heart.innerHTML = '❤️';
-  heart.style.left = Math.random() * 100 + 'vw';
-  heart.style.top = '100vh';
-  heart.style.fontSize = (12 + Math.random()*15) + 'px';
-  heart.style.opacity = 0.5 + Math.random()*0.5;
-  document.body.appendChild(heart);
-
-  let speed = 1 + Math.random()*1.5;
-  function move() {
-    let top = parseFloat(heart.style.top);
-    if(top < -50) { heart.remove(); return; }
-    heart.style.top = top - speed + 'px';
-    requestAnimationFrame(move);
-  }
-  move();
-}
-
-setInterval(createHearts
+</body>
+</html>
