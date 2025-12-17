@@ -87,7 +87,17 @@ button {
   cursor: pointer;
 }
 
-/* 🌸 ROMANTİK YAZILAR */
+/* 🌸 ROMANTİK YAZILAR CONTAINER */
+.romantic-text {
+  position: relative;
+  z-index: 9999; /* overlay’ın üstünde */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* 🌸 ROMANTİK YAZILAR LİNE */
 .romantic-line {
   font-size: 28px;
   color: #e91e63;
@@ -96,29 +106,25 @@ button {
   text-shadow:
     0 0 10px rgba(255,105,180,1),
     0 0 18px rgba(255,182,193,1);
-  z-index: 2;
-  filter: none; /* blur kaldırıldı */
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.3s linear;
 }
 
 /* 🌟 SON CÜMLE */
 .big-final {
-  font-size: 40px;
+  font-size: 45px;
   font-weight: bold;
   color: #ff2f92;
   text-shadow:
-    0 0 20px rgba(255,105,180,1),
-    0 0 35px rgba(255,182,193,1),
-    0 0 50px rgba(255,105,180,1);
+    0 0 25px rgba(255,105,180,1),
+    0 0 40px rgba(255,182,193,1),
+    0 0 60px rgba(255,105,180,1);
   animation: megaGlow 1.6s infinite alternate;
-  filter: none; /* blur kaldırıldı */
   opacity: 1;
 }
 
-/* Nabız animasyonu */
 @keyframes megaGlow {
-  0% { transform: scale(1); opacity: 0.85; }
+  0% { transform: scale(1); opacity: 0.9; }
   100% { transform: scale(1.08); opacity: 1; }
 }
 
@@ -194,7 +200,7 @@ function startAll() {
   setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
-    h.innerText = "🤍İYİ Kİ DOĞDUN SEVGİLİM🤍";
+    h.innerText = "🤍SENİ ÇOK SEVİYORUM🤍";
     h.style.left = Math.random() * 100 + "vw";
     h.style.fontSize = 12 + Math.random()*14 + "px";
     document.body.appendChild(h);
@@ -210,8 +216,8 @@ function startRomanticText() {
   let i = 0;
 
   const interval = setInterval(() => {
-    // Son cümle
     if(i === romanticLines.length - 1) {
+      // Son cümle
       const lastDiv = document.createElement("div");
       lastDiv.className = "romantic-line big-final";
       lastDiv.innerHTML = romanticLines[i];
@@ -221,14 +227,16 @@ function startRomanticText() {
       return;
     }
 
-    // Diğer cümleler: görünür ol ve 3 saniye sonra kaybol
+    // Diğer cümleler: sırayla çık ve kaybol
     const div = document.createElement("div");
     div.className = "romantic-line";
     div.innerHTML = romanticLines[i];
     box.appendChild(div);
+    // görünür yap
+    div.style.opacity = 1;
     setTimeout(() => {
       div.style.opacity = 0;
-      setTimeout(() => div.remove(), 600);
+      setTimeout(() => div.remove(), 400);
     }, 3000);
     i++;
   }, 3500);
