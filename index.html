@@ -47,7 +47,7 @@ body {
 
 /* Kart köşe kalpleri */
 .card::before {
-  content: "👉🏻😘👈🏻";
+  content: "😘";
   position: absolute;
   top: 15px;
   left: 15px;
@@ -123,9 +123,34 @@ button {
   opacity: 1;
 }
 
+/* Nabız animasyonu */
 @keyframes megaGlow {
   0% { transform: scale(1); opacity: 0.9; }
   100% { transform: scale(1.08); opacity: 1; }
+}
+
+/* 🌟 BÜYÜK AŞK MESAJI */
+.love-message {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 48px;
+  font-weight: bold;
+  color: #ff1493;
+  text-shadow:
+    0 0 20px #ff1493,
+    0 0 40px #ff69b4,
+    0 0 60px #ffb6c1;
+  animation: heartPulse 1.4s infinite alternate;
+  opacity: 0;
+  z-index: 9999;
+  text-align: center;
+}
+
+@keyframes heartPulse {
+  0% { transform: translateX(-50%) scale(1); opacity: 0.85; }
+  100% { transform: translateX(-50%) scale(1.08); opacity: 1; }
 }
 
 /* UÇAN YAZI */
@@ -207,7 +232,6 @@ function startAll() {
     setTimeout(() => h.remove(), 10000);
   }, 600);
 
-  // Romantik yazılar
   startRomanticText();
 }
 
@@ -217,22 +241,29 @@ function startRomanticText() {
 
   const interval = setInterval(() => {
     if(i === romanticLines.length - 1) {
-      // Son cümle
       const lastDiv = document.createElement("div");
       lastDiv.className = "romantic-line big-final";
       lastDiv.innerHTML = romanticLines[i];
       box.appendChild(lastDiv);
       startCardHeartsInfinite();
       clearInterval(interval);
+
+      // 3 saniye sonra aşk mesajı
+      setTimeout(() => {
+        const loveMsg = document.createElement('div');
+        loveMsg.className = 'love-message';
+        loveMsg.innerText = 'SENİ ÇOK SEVİYORUM SEVGİLİM';
+        document.querySelector('.card').appendChild(loveMsg);
+        loveMsg.style.opacity = 1;
+      }, 3000);
+
       return;
     }
 
-    // Diğer cümleler: sırayla çık ve kaybol
     const div = document.createElement("div");
     div.className = "romantic-line";
     div.innerHTML = romanticLines[i];
     box.appendChild(div);
-    // görünür yap
     div.style.opacity = 1;
     setTimeout(() => {
       div.style.opacity = 0;
