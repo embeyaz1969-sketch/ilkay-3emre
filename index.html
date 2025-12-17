@@ -211,72 +211,90 @@ to{transform:translateY(-120vh);opacity:0}
 <audio id="music" src="senden-daha-guzel.mp3"></audio>
 
 <script>
-let started=false;
-const lines=[
-"Seni sevmek, her gün biraz daha bağlanmak gibi.",
-"Gözlerine bakınca dünya sakinleşiyor.",
-"Yanımda olman kalbime en güzel huzur."
+let started = false;
+let flyTimer, heartTimer;
+
+const romanticLines = [
+  "Seni sevmek, her gün biraz daha bağlanmak gibi.",
+  "Gözlerine bakınca dünya sakinleşiyor.",
+  "Yanımda olman kalbime en güzel huzur."
 ];
 
-function startAll(){
-if(started) return;
-started=true;
-document.getElementById("music").play().catch(()=>{});
+function startAll() {
+  if (started) return;
+  started = true;
 
-setInterval(()=>{
-const t=document.createElement("div");
-t.className="fly";
-t.innerText="İLKAY 🤍 EMRE";
-t.style.left=Math.random()*100+"vw";
-document.body.appendChild(t);
-setTimeout(()=>t.remove(),9000);
-},900);
+  document.getElementById("music").play().catch(()=>{});
 
-setInterval(()=>{
-const h=document.createElement("div");
-h.className="heart";
-h.innerText="💖";
-h.style.left=Math.random()*100+"vw";
-h.style.fontSize=14+Math.random()*18+"px";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),11000);
-},700);
+  // Uçan yazılar
+  flyTimer = setInterval(() => {
+    const t = document.createElement("div");
+    t.className = "fly";
+    t.innerText = "İLKAY 🤍 EMRE";
+    t.style.left = Math.random()*100 + "vw";
+    document.body.appendChild(t);
+    setTimeout(()=>t.remove(),9000);
+  }, 900);
 
-const box=document.getElementById("romanticText");
-let i=0;
+  // Uçan kalpler
+  heartTimer = setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "💖";
+    h.style.left = Math.random()*100 + "vw";
+    h.style.fontSize = 14 + Math.random()*18 + "px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),11000);
+  }, 700);
 
-const interval=setInterval(()=>{
-if(i>=lines.length){
-clearInterval(interval);
-
-const final=document.createElement("div");
-final.className="romantic-line big-final";
-final.innerText="BUGÜN SENİN GÜNÜN\nİYİ Kİ DOĞDUN SEVGİLİM 🤍";
-box.appendChild(final);
-
-setTimeout(()=>{
-const love=document.createElement("div");
-love.className="love-message";
-love.innerText="🤍 İYİ Kİ SEN SEVGİLİM 🤍";
-document.body.appendChild(love);
-
-setTimeout(()=>{
-const blue=document.createElement("div");
-blue.className="blue-love";
-blue.innerText="SENİ ÇOK SEVİYORUM 💙";
-box.appendChild(blue);
-},3000);
-
-},3000);
-return;
+  playRomanticLines(0);
 }
 
-const d=document.createElement("div");
-d.className="romantic-line";
-d.innerText=lines[i];
-box.appendChild(d);
-i++;
-},3500);
+function playRomanticLines(index) {
+  const box = document.getElementById("romanticText");
+
+  if (index >= romanticLines.length) {
+    showFinalMessages();
+    return;
+  }
+
+  const line = document.createElement("div");
+  line.className = "romantic-line";
+  line.innerText = romanticLines[index];
+  box.appendChild(line);
+
+  setTimeout(() => {
+    line.remove();
+    playRomanticLines(index + 1);
+  }, 3500);
+}
+
+function showFinalMessages() {
+  const box = document.getElementById("romanticText");
+
+  // ROMANTİKLER BİTTİ → UÇANLARI DURDUR
+  clearInterval(flyTimer);
+  clearInterval(heartTimer);
+
+  const final = document.createElement("div");
+  final.className = "romantic-line big-final";
+  final.innerText = "BUGÜN SENİN GÜNÜN\nİYİ Kİ DOĞDUN SEVGİLİM 🤍";
+  box.appendChild(final);
+
+  setTimeout(() => {
+    const love = document.createElement("div");
+    love.className = "love-message";
+    love.innerText = "🤍 İYİ Kİ SEN SEVGİLİM 🤍";
+    document.body.appendChild(love);
+
+    setTimeout(() => {
+      const blue = document.createElement("div");
+      blue.className = "blue-love";
+      blue.innerText = "SENİ ÇOK SEVİYORUM 💙";
+      box.appendChild(blue);
+    }, 3000);
+
+  }, 3000);
 }
 </script>
 </body>
