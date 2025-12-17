@@ -212,7 +212,9 @@ to{transform:translateY(-120vh);opacity:0}
 
 <script>
 let started = false;
-let flyTimer, heartTimer;
+let stopped = false;
+let flyTimer = null;
+let heartTimer = null;
 
 const romanticLines = [
   "Seni sevmek, her gün biraz daha bağlanmak gibi.",
@@ -223,11 +225,18 @@ const romanticLines = [
 function startAll() {
   if (started) return;
   started = true;
+  stopped = false;
 
   document.getElementById("music").play().catch(()=>{});
 
-  // Uçan yazılar
+  startFlying();
+  playLine(0);
+}
+
+/* UÇANLAR */
+function startFlying(){
   flyTimer = setInterval(() => {
+    if (stopped) return;
     const t = document.createElement("div");
     t.className = "fly";
     t.innerText = "İLKAY 🤍 EMRE";
@@ -236,8 +245,8 @@ function startAll() {
     setTimeout(()=>t.remove(),9000);
   }, 900);
 
-  // Uçan kalpler
   heartTimer = setInterval(() => {
+    if (stopped) return;
     const h = document.createElement("div");
     h.className = "heart";
     h.innerText = "💖";
@@ -246,35 +255,39 @@ function startAll() {
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),11000);
   }, 700);
-
-  playRomanticLines(0);
 }
 
-function playRomanticLines(index) {
+/* ROMANTİK YAZILAR – ZİNCİRLİ */
+function playLine(i){
+  if (stopped) return;
+
   const box = document.getElementById("romanticText");
 
-  if (index >= romanticLines.length) {
-    showFinalMessages();
+  if (i >= romanticLines.length) {
+    finishRomantic();
     return;
   }
 
-  const line = document.createElement("div");
-  line.className = "romantic-line";
-  line.innerText = romanticLines[index];
-  box.appendChild(line);
+  const d = document.createElement("div");
+  d.className = "romantic-line";
+  d.innerText = romanticLines[i];
+  box.appendChild(d);
 
   setTimeout(() => {
-    line.remove();
-    playRomanticLines(index + 1);
+    if (stopped) return;
+    d.remove();
+    playLine(i + 1);
   }, 3500);
 }
 
-function showFinalMessages() {
-  const box = document.getElementById("romanticText");
+/* FİNAL */
+function finishRomantic(){
+  stopped = true;
 
-  // ROMANTİKLER BİTTİ → UÇANLARI DURDUR
   clearInterval(flyTimer);
   clearInterval(heartTimer);
+
+  const box = document.getElementById("romanticText");
 
   const final = document.createElement("div");
   final.className = "romantic-line big-final";
