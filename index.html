@@ -7,7 +7,11 @@
 
 .overlay { position: fixed; inset: 0; backdrop-filter: blur(8px); background: rgba(255,182,193,0.15); z-index: 1; }
 
-.card { position: relative; z-index: 2; padding: 45px 45px 60px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3); overflow: visible; background: linear-gradient( to right, rgba(255,225,235,0.98), rgba(255,245,250,0.96) ); }
+.card { position: relative; z-index: 2; padding: 55px 55px 70px; border-radius: 35px; text-align: center; box-shadow: 0 25px 60px rgba(255,105,180,0.45), 0 0 40px rgba(255,182,193,0.6), inset 0 0 30px rgba(255,255,255,0.7); overflow: visible; background: linear-gradient( 135deg, rgba(255,200,220,0.98), rgba(255,240,250,0.98), rgba(255,210,235,0.98) ); }
+
+/* Parlayan kenar */ .card::before { content: ""; position: absolute; inset: -3px; border-radius: 38px; background: linear-gradient(120deg, #ff69b4, #ffb6c1, #ff69b4); filter: blur(8px); z-index: -1; animation: borderGlow 3s linear infinite; }
+
+@keyframes borderGlow { 0% { filter: blur(6px); opacity: 0.6; } 50% { filter: blur(10px); opacity: 1; } 100% { filter: blur(6px); opacity: 0.6; } } overflow: visible; background: linear-gradient( to right, rgba(255,225,235,0.98), rgba(255,245,250,0.96) ); }
 
 .card::before { content: "😘"; position: absolute; top: 15px; left: 15px; font-size: 22px; }
 
@@ -15,15 +19,19 @@
 
 @keyframes heartGlow { 0% { opacity: 0.25; } 50% { opacity: 0.45; } 100% { opacity: 0.25; } }
 
-h1 { color: #e91e63; } p  { font-size: 20px; }
+h1 { color: #ff2f92; font-size: 34px; letter-spacing: 1px; text-shadow: 0 0 15px rgba(255,105,180,1), 0 0 30px rgba(255,182,193,1); } p  { font-size: 20px; }
 
-button { margin-top: 20px; padding: 14px 34px; font-size: 18px; border: none; border-radius: 30px; background: #ff69b4; color: white; cursor: pointer; }
+button { margin-top: 25px; padding: 16px 40px; font-size: 20px; font-weight: bold; border: none; border-radius: 40px; background: linear-gradient(135deg, #ff1493, #ff69b4, #ffb6c1); color: white; cursor: pointer; box-shadow: 0 0 20px rgba(255,105,180,0.9), 0 0 40px rgba(255,182,193,0.9); animation: buttonGlow 1.8s infinite alternate; }
+
+button:active { transform: scale(0.95); }
+
+@keyframes buttonGlow { 0% { box-shadow: 0 0 15px rgba(255,105,180,0.8); } 100% { box-shadow: 0 0 40px rgba(255,182,193,1); } } }
 
 .romantic-text { position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
 
-.romantic-line { font-size: 28px; color: #e91e63; text-align: center; margin-top: 18px; text-shadow: 0 0 10px rgba(255,105,180,1), 0 0 18px rgba(255,182,193,1); opacity: 0; transition: opacity 0.6s ease; }
+.romantic-line { font-size: 30px; font-weight: 600; color: #ff2f92; text-align: center; margin-top: 20px; letter-spacing: 0.5px; text-shadow: 0 0 12px rgba(255,105,180,1), 0 0 24px rgba(255,182,193,1); opacity: 0; transition: opacity 0.6s ease; }
 
-.big-final { font-size: 45px; font-weight: bold; color: #ff2f92; opacity: 1 !important; text-shadow: 0 0 25px rgba(255,105,180,1), 0 0 40px rgba(255,182,193,1), 0 0 60px rgba(255,105,180,1); animation: megaGlow 1.6s infinite alternate; }
+.big-final { font-size: 52px; font-weight: 800; color: #ff1493; letter-spacing: 1px; opacity: 1 !important; text-shadow: 0 0 25px rgba(255,20,147,1), 0 0 50px rgba(255,105,180,1), 0 0 80px rgba(255,182,193,1); animation: megaGlow 1.4s infinite alternate; }
 
 @keyframes megaGlow { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.08); opacity: 1; } }
 
@@ -33,7 +41,11 @@ button { margin-top: 20px; padding: 14px 34px; font-size: 18px; border: none; bo
 
 /* 💙 MAVİ BÜYÜK AŞK YAZISI */ .blue-love { margin-top: 20px; font-size: 50px; font-weight: bold; color: #4da6ff; text-shadow: 0 0 15px rgba(77,166,255,0.9), 0 0 30px rgba(77,166,255,0.9), 0 0 50px rgba(77,166,255,1); animation: bluePulse 1.3s infinite alternate; opacity: 0; }
 
-@keyframes bluePulse { 0% { transform: scale(1); opacity: 0.85; } 100% { transform: scale(1.1); opacity: 1; } } 100% { transform: translateX(-50%) scale(1.08); opacity: 1; } }
+@keyframes bluePulse { 0% { transform: scale(1); opacity: 0.85; } 100% { transform: scale(1.1); opacity: 1; } }
+
+/* İlk çıkışta büyüme efekti */ .pop-in { animation: popIn 0.9s ease-out forwards, bluePulse 1.3s infinite alternate; }
+
+@keyframes popIn { 0% { transform: scale(0.6); opacity: 0; } 100% { transform: scale(1); opacity: 1; } } 100% { transform: scale(1.1); opacity: 1; } } 100% { transform: translateX(-50%) scale(1.08); opacity: 1; } }
 
 .fly { position: fixed; bottom: -40px; font-size: 18px; font-weight: bold; color: #ff1493; animation: flyUp 8s linear forwards; pointer-events: none; z-index: 3; }
 
@@ -45,11 +57,14 @@ button { margin-top: 20px; padding: 14px 34px; font-size: 18px; border: none; bo
 <body><div class="overlay"></div><div class="card">
   <h1>❤️ GÜZELLER GÜZELİ PRENSESİME ❤️</h1>
   <p>💙19.05.2025-ᨖ💙</p>
-  <button onclick="startAll()">👉🏻🤍🫆🤍👈🏻</button>
+  <button id="controlBtn" onclick="toggleAll()">💖 BAŞLAT 💖</button>
 </div><div class="romantic-text" id="romanticText"></div><audio id="music" src="senden-daha-guzel.mp3"></audio>
 
 <script>
 let started = false;
+let flyInterval;
+let paused = false;
+let heartInterval;
 const romanticLines = [
   "Seni sevmek, her gün biraz daha bağlanmak gibi.",
   "Gözlerine bakınca dünya sakinleşiyor.",
@@ -60,10 +75,9 @@ const romanticLines = [
 function startAll() {
   if(started) return;
   started = true;
-
   document.getElementById("music").play();
 
-  setInterval(() => {
+  flyInterval = setInterval(() => {
     const t = document.createElement("div");
     t.className = "fly";
     t.innerText = "İLKAY🤍EMRE";
@@ -72,10 +86,10 @@ function startAll() {
     setTimeout(() => t.remove(), 8000);
   }, 900);
 
-  setInterval(() => {
+  heartInterval = setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
-    h.innerText = "🤍SENİ ÇOK SEVİYORUM🤍";
+    h.innerText = "🤍";
     h.style.left = Math.random() * 100 + "vw";
     h.style.fontSize = 12 + Math.random()*14 + "px";
     document.body.appendChild(h);
@@ -83,6 +97,31 @@ function startAll() {
   }, 700);
 
   startRomanticText();
+}
+
+function toggleAll() {
+  const btn = document.getElementById('controlBtn');
+  const music = document.getElementById('music');
+
+  if(!started) {
+    startAll();
+    btn.innerText = '⏸ DURDUR';
+    return;
+  }
+
+  paused = !paused;
+
+  if(paused) {
+    music.pause();
+    clearInterval(flyInterval);
+    clearInterval(heartInterval);
+    btn.innerText = '▶ DEVAM ET';
+  } else {
+    music.play();
+    startAll();
+    btn.innerText = '⏸ DURDUR';
+  }
+}
 }
 
 function startRomanticText() {
@@ -96,6 +135,11 @@ function startRomanticText() {
       lastDiv.innerHTML = romanticLines[i];
       box.appendChild(lastDiv);
 
+      // Arka planı sakinleştir (final odak)
+      clearInterval(flyInterval);
+      clearInterval(heartInterval);
+
+      // 3 sn sonra üst mesaj
       setTimeout(() => {
         const loveMsg = document.createElement('div');
         loveMsg.className = 'love-message';
@@ -103,14 +147,36 @@ function startRomanticText() {
         document.body.appendChild(loveMsg);
         loveMsg.style.opacity = 1;
 
-        // 3 saniye sonra mavi büyük mesaj
+        // 3 sn sessizlik + final mavi mesaj
         setTimeout(() => {
           const blueLove = document.createElement('div');
-          blueLove.className = 'blue-love';
+          blueLove.className = 'blue-love pop-in';
           blueLove.innerText = 'SENİ ÇOK SEVİYORUM💙';
-          document.getElementById('romanticText').appendChild(blueLove);
+          box.appendChild(blueLove);
           blueLove.style.opacity = 1;
         }, 3000);
+      }, 3000);
+
+      startCardHeartsInfinite();
+      clearInterval(interval);
+      return;
+    }
+
+    const div = document.createElement("div");
+    div.className = "romantic-line";
+    div.innerHTML = romanticLines[i];
+    box.appendChild(div);
+
+    requestAnimationFrame(() => div.style.opacity = 1);
+
+    setTimeout(() => {
+      div.style.opacity = 0;
+      setTimeout(() => div.remove(), 600);
+    }, 3000);
+
+    i++;
+  }, 3500);
+}, 3000);
       }, 3000);
 
       startCardHeartsInfinite();
