@@ -132,12 +132,14 @@ button {
 /* 🌟 BÜYÜK AŞK MESAJI */
 .love-message {
   position: absolute;
-  top: -60px;
+  top: -30px; /* kartın üstüne hizalı */
   left: 50%;
   transform: translateX(-50%);
   font-size: 48px;
   font-weight: bold;
-  color: #ff1493;
+  background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1, #ff1493);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   text-shadow:
     0 0 20px #ff1493,
     0 0 40px #ff69b4,
@@ -187,7 +189,7 @@ button {
 <div class="overlay"></div>
 
 <div class="card">
-  <h1>❤️ GÜZEL KIZIM'A ❤️</h1>
+  <h1>❤️ GÜZELLER GÜZELİ PRENSESİME ❤️</h1>
   <p>💙19.05.2025-ᨖ💙</p>
   <button onclick="startAll()">👉🏻🤍🫆🤍👈🏻</button>
 </div>
@@ -252,7 +254,7 @@ function startRomanticText() {
       setTimeout(() => {
         const loveMsg = document.createElement('div');
         loveMsg.className = 'love-message';
-        loveMsg.innerText = 'SENİ ÇOK SEVİYORUM SEVGİLİM';
+        loveMsg.innerText = '🤍İYİ Kİ SEN SEVGİLİM🤍';
         document.querySelector('.card').appendChild(loveMsg);
         loveMsg.style.opacity = 1;
       }, 3000);
@@ -289,6 +291,5 @@ function startCardHeartsInfinite() {
   }, 200);
 }
 </script>
-
 </body>
 </html>
