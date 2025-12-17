@@ -1,202 +1,48 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!DOCTYPE html><html lang="tr">
 <head>
 <meta charset="UTF-8">
 <title>Ilkay Emre</title>
 <style>
-* { box-sizing: border-box; }
+* { box-sizing: border-box; }body { margin: 0; height: 100vh; overflow: hidden; font-family: Arial, sans-serif; display: flex; flex-direction: column; justify-content: center; align-items: center; background: linear-gradient(rgba(255,182,193,0.25), rgba(255,182,193,0.25)), url("IMG-20251117-WA0008.jpg") no-repeat center/cover; }
 
-body {
-  margin: 0;
-  height: 100vh;
-  overflow: hidden;
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background:
-    linear-gradient(rgba(255,182,193,0.25), rgba(255,182,193,0.25)),
-    url("IMG-20251117-WA0008.jpg") no-repeat center/cover;
-}
+.overlay { position: fixed; inset: 0; backdrop-filter: blur(8px); background: rgba(255,182,193,0.15); z-index: 1; }
 
-/* Hafif blur arka plan */
-.overlay {
-  position: fixed;
-  inset: 0;
-  backdrop-filter: blur(8px);
-  background: rgba(255,182,193,0.15);
-  z-index: 1;
-}
+.card { position: relative; z-index: 2; padding: 45px 45px 60px; border-radius: 30px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3); overflow: visible; background: linear-gradient( to right, rgba(255,225,235,0.98), rgba(255,245,250,0.96) ); }
 
-/* KART */
-.card {
-  position: relative;
-  z-index: 2;
-  padding: 45px;
-  border-radius: 30px;
-  text-align: center;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  overflow: hidden;
-  background: linear-gradient(
-    to right,
-    rgba(255,225,235,0.98),
-    rgba(255,245,250,0.96)
-  );
-}
+.card::before { content: "😘"; position: absolute; top: 15px; left: 15px; font-size: 22px; }
 
-/* Kart köşe kalpleri */
-.card::before {
-  content: "😘";
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  font-size: 22px;
-}
-.card::after {
-  content: "İLKAY❤️EMRE";
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 14px;
-  opacity: 0.35;
-  filter: drop-shadow(0 0 6px rgba(255,105,180,0.8));
-  animation: heartGlow 3s ease-in-out infinite;
-  pointer-events: none;
-}
+.card::after { content: "İLKAY❤️EMRE"; position: absolute; bottom: 10px; left: 0; right: 0; text-align: center; font-size: 14px; opacity: 0.35; filter: drop-shadow(0 0 6px rgba(255,105,180,0.8)); animation: heartGlow 3s ease-in-out infinite; pointer-events: none; }
 
-@keyframes heartGlow {
-  0% { opacity: 0.25; }
-  50% { opacity: 0.45; }
-  100% { opacity: 0.25; }
-}
+@keyframes heartGlow { 0% { opacity: 0.25; } 50% { opacity: 0.45; } 100% { opacity: 0.25; } }
 
-h1 { color: #e91e63; }
-p  { font-size: 20px; }
+h1 { color: #e91e63; } p  { font-size: 20px; }
 
-button {
-  margin-top: 20px;
-  padding: 14px 34px;
-  font-size: 18px;
-  border: none;
-  border-radius: 30px;
-  background: #ff69b4;
-  color: white;
-  cursor: pointer;
-}
+button { margin-top: 20px; padding: 14px 34px; font-size: 18px; border: none; border-radius: 30px; background: #ff69b4; color: white; cursor: pointer; }
 
-/* 🌸 ROMANTİK YAZILAR CONTAINER */
-.romantic-text {
-  position: relative;
-  z-index: 9999; /* overlay’ın üstünde */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
+.romantic-text { position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
 
-/* 🌸 ROMANTİK YAZILAR LİNE */
-.romantic-line {
-  font-size: 28px;
-  color: #e91e63;
-  text-align: center;
-  margin-top: 18px;
-  text-shadow:
-    0 0 10px rgba(255,105,180,1),
-    0 0 18px rgba(255,182,193,1);
-  opacity: 0;
-  transition: opacity 0.3s linear;
-}
+.romantic-line { font-size: 28px; color: #e91e63; text-align: center; margin-top: 18px; text-shadow: 0 0 10px rgba(255,105,180,1), 0 0 18px rgba(255,182,193,1); opacity: 0; transition: opacity 0.6s ease; }
 
-/* 🌟 SON CÜMLE */
-.big-final {
-  font-size: 45px;
-  font-weight: bold;
-  color: #ff2f92;
-  text-shadow:
-    0 0 25px rgba(255,105,180,1),
-    0 0 40px rgba(255,182,193,1),
-    0 0 60px rgba(255,105,180,1);
-  animation: megaGlow 1.6s infinite alternate;
-  opacity: 1;
-}
+.big-final { font-size: 45px; font-weight: bold; color: #ff2f92; opacity: 1 !important; text-shadow: 0 0 25px rgba(255,105,180,1), 0 0 40px rgba(255,182,193,1), 0 0 60px rgba(255,105,180,1); animation: megaGlow 1.6s infinite alternate; }
 
-/* Nabız animasyonu */
-@keyframes megaGlow {
-  0% { transform: scale(1); opacity: 0.9; }
-  100% { transform: scale(1.08); opacity: 1; }
-}
+@keyframes megaGlow { 0% { transform: scale(1); opacity: 0.9; } 100% { transform: scale(1.08); opacity: 1; } }
 
-/* 🌟 BÜYÜK AŞK MESAJI */
-.love-message {
-  position: absolute;
-  top: -30px; /* kartın üstüne hizalı */
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 48px;
-  font-weight: bold;
-  background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1, #ff1493);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow:
-    0 0 20px #ff1493,
-    0 0 40px #ff69b4,
-    0 0 60px #ffb6c1;
-  animation: heartPulse 1.4s infinite alternate;
-  opacity: 0;
-  z-index: 9999;
-  text-align: center;
-}
+.love-message { position: fixed; top: calc(50% - 220px); /* kartın üstüne alındı */ left: 50%; transform: translateX(-50%); font-size: 48px; font-weight: bold; background: linear-gradient(45deg, #ff1493, #ff69b4, #ffb6c1, #ff1493); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 0 20px #ff1493, 0 0 40px #ff69b4, 0 0 60px #ffb6c1; animation: heartPulse 1.4s infinite alternate; opacity: 0; z-index: 9999; white-space: nowrap; }
 
-@keyframes heartPulse {
-  0% { transform: translateX(-50%) scale(1); opacity: 0.85; }
-  100% { transform: translateX(-50%) scale(1.08); opacity: 1; }
-}
+@keyframes heartPulse { 0% { transform: translateX(-50%) scale(1); opacity: 0.85; } 100% { transform: translateX(-50%) scale(1.08); opacity: 1; } }
 
-/* UÇAN YAZI */
-.fly {
-  position: fixed;
-  bottom: -40px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #ff1493;
-  animation: flyUp 8s linear forwards;
-  pointer-events: none;
-  z-index: 3;
-}
+.fly { position: fixed; bottom: -40px; font-size: 18px; font-weight: bold; color: #ff1493; animation: flyUp 8s linear forwards; pointer-events: none; z-index: 3; }
 
-@keyframes flyUp {
-  from { transform: translateY(0); opacity: 1; }
-  to   { transform: translateY(-120vh); opacity: 0; }
-}
+.heart { position: fixed; bottom: -20px; font-size: 16px; color: #ff69b4; animation: flyUp 10s linear forwards; pointer-events: none; z-index: 2; }
 
-/* UÇAN KALP */
-.heart {
-  position: fixed;
-  bottom: -20px;
-  font-size: 16px;
-  color: #ff69b4;
-  animation: flyUp 10s linear forwards;
-  pointer-events: none;
-  z-index: 2;
-}
-</style>
+@keyframes flyUp { from { transform: translateY(0); opacity: 1; } to   { transform: translateY(-120vh); opacity: 0; } } </style>
+
 </head>
-<body>
-
-<div class="overlay"></div>
-
-<div class="card">
+<body><div class="overlay"></div><div class="card">
   <h1>❤️ GÜZELLER GÜZELİ PRENSESİME ❤️</h1>
   <p>💙19.05.2025-ᨖ💙</p>
   <button onclick="startAll()">👉🏻🤍🫆🤍👈🏻</button>
-</div>
-
-<div class="romantic-text" id="romanticText"></div>
-
-<audio id="music" src="senden-daha-guzel.mp3"></audio>
+</div><div class="romantic-text" id="romanticText"></div><audio id="music" src="senden-daha-guzel.mp3"></audio>
 
 <script>
 let started = false;
@@ -213,7 +59,6 @@ function startAll() {
 
   document.getElementById("music").play();
 
-  // Uçan yazılar
   setInterval(() => {
     const t = document.createElement("div");
     t.className = "fly";
@@ -221,9 +66,8 @@ function startAll() {
     t.style.left = Math.random() * 100 + "vw";
     document.body.appendChild(t);
     setTimeout(() => t.remove(), 8000);
-  }, 800);
+  }, 900);
 
-  // Uçan kalpler
   setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
@@ -232,7 +76,7 @@ function startAll() {
     h.style.fontSize = 12 + Math.random()*14 + "px";
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 10000);
-  }, 600);
+  }, 700);
 
   startRomanticText();
 }
@@ -247,10 +91,7 @@ function startRomanticText() {
       lastDiv.className = "romantic-line big-final";
       lastDiv.innerHTML = romanticLines[i];
       box.appendChild(lastDiv);
-      startCardHeartsInfinite();
-      clearInterval(interval);
 
-      // 3 saniye sonra aşk mesajı
       setTimeout(() => {
         const loveMsg = document.createElement('div');
         loveMsg.className = 'love-message';
@@ -259,6 +100,8 @@ function startRomanticText() {
         loveMsg.style.opacity = 1;
       }, 3000);
 
+      startCardHeartsInfinite();
+      clearInterval(interval);
       return;
     }
 
@@ -266,16 +109,18 @@ function startRomanticText() {
     div.className = "romantic-line";
     div.innerHTML = romanticLines[i];
     box.appendChild(div);
-    div.style.opacity = 1;
+
+    requestAnimationFrame(() => div.style.opacity = 1);
+
     setTimeout(() => {
       div.style.opacity = 0;
-      setTimeout(() => div.remove(), 400);
+      setTimeout(() => div.remove(), 600);
     }, 3000);
+
     i++;
   }, 3500);
 }
 
-// Kart etrafında kalpler (son cümle için sonsuz)
 function startCardHeartsInfinite() {
   const card = document.querySelector('.card');
   setInterval(() => {
@@ -288,8 +133,7 @@ function startCardHeartsInfinite() {
     h.style.fontSize = 16 + Math.random()*14 + "px";
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 4000);
-  }, 200);
+  }, 220);
 }
-</script>
-</body>
+</script></body>
 </html>
