@@ -75,7 +75,9 @@ const romanticLines = [
 function startAll() {
   if(started) return;
   started = true;
-  document.getElementById("music").play();
+
+  const music = document.getElementById("music");
+  music.play().catch(()=>{});
 
   flyInterval = setInterval(() => {
     const t = document.createElement("div");
@@ -85,6 +87,62 @@ function startAll() {
     document.body.appendChild(t);
     setTimeout(() => t.remove(), 8000);
   }, 900);
+
+  heartInterval = setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "🤍";
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = 12 + Math.random()*14 + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 10000);
+  }, 700);
+
+  startRomanticText();
+}
+
+function toggleAll() {
+  const btn = document.getElementById('controlBtn');
+  const music = document.getElementById('music');
+
+  if(!started) {
+    startAll();
+    btn.innerText = '⏸ DURDUR';
+    return;
+  }
+
+  paused = !paused;
+
+  if(paused) {
+    music.pause();
+    clearInterval(flyInterval);
+    clearInterval(heartInterval);
+    btn.innerText = '▶ DEVAM ET';
+  } else {
+    music.play().catch(()=>{});
+
+    flyInterval = setInterval(() => {
+      const t = document.createElement("div");
+      t.className = "fly";
+      t.innerText = "İLKAY🤍EMRE";
+      t.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 8000);
+    }, 900);
+
+    heartInterval = setInterval(() => {
+      const h = document.createElement("div");
+      h.className = "heart";
+      h.innerText = "🤍";
+      h.style.left = Math.random() * 100 + "vw";
+      h.style.fontSize = 12 + Math.random()*14 + "px";
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 10000);
+    }, 700);
+
+    btn.innerText = '⏸ DURDUR';
+  }
+}, 900);
 
   heartInterval = setInterval(() => {
     const h = document.createElement("div");
