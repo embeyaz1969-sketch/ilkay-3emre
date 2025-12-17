@@ -194,7 +194,21 @@ function start(){
 
     // 🔥 MAVİ YAZI 3 SANİYE SONRA
     setTimeout(()=>{
-      textBox.innerHTML+=`<div class="blue-love">SENİ ÇOK SEVİYORUM 💙</div>`;
+      const blueText = document.createElement("div");
+      blueText.className="blue-love";
+      blueText.innerHTML="SENİ ÇOK SEVİYORUM 💙";
+      document.querySelector(".card").prepend(blueText);
+
+      // 3 saniye sonra ikinci pembe gösterişli yazı
+      setTimeout(()=>{
+        const pinkText = document.createElement("div");
+        pinkText.className="blue-love"; // aynı animasyon
+        pinkText.style.color="#ff1493"; // parlak pembe
+        pinkText.style.textShadow="0 0 20px #ff69b4"; // parlaklık
+        pinkText.innerHTML="🤍 İYİ Kİ SEN SEVGİLİM 🤍";
+        document.querySelector(".card").prepend(pinkText);
+      },3000);
+
     },3000);
 
     running=false;
