@@ -94,9 +94,10 @@ button {
   text-align: center;
   margin-top: 18px;
   text-shadow:
-    0 0 10px rgba(255,105,180,0.8),
-    0 0 18px rgba(255,182,193,0.9);
+    0 0 10px rgba(255,105,180,1),
+    0 0 18px rgba(255,182,193,1);
   z-index: 2;
+  filter: none; /* blur kaldırıldı */
 }
 
 /* 🌟 SON CÜMLE */
@@ -107,8 +108,9 @@ button {
   text-shadow:
     0 0 20px rgba(255,105,180,1),
     0 0 35px rgba(255,182,193,1),
-    0 0 50px rgba(255,105,180,0.9);
+    0 0 50px rgba(255,105,180,1);
   animation: megaGlow 1.6s infinite alternate;
+  filter: none; /* blur kaldırıldı */
 }
 
 @keyframes megaGlow {
@@ -189,7 +191,7 @@ function startAll() {
   setInterval(() => {
     const h = document.createElement("div");
     h.className = "heart";
-    h.innerText = "🤍İYİ Kİ DOĞDUN SEVGİLİM🤍";
+    h.innerText = "🤍";
     h.style.left = Math.random() * 100 + "vw";
     h.style.fontSize = 12 + Math.random()*14 + "px";
     document.body.appendChild(h);
