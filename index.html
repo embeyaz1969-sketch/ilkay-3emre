@@ -6,13 +6,13 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
   margin:0;
   height:100vh;
   overflow:hidden;
   font-family:Arial, sans-serif;
   display:flex;
-  flex-direction:column;
   justify-content:center;
   align-items:center;
   background:
@@ -20,52 +20,39 @@ body{
     url("IMG-20251117-WA0008.jpg") center/cover no-repeat;
 }
 
-/* ARKA PLAN EKG */
-.ekg{
-  position:fixed;
-  inset:0;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      transparent 0 40px,
-      rgba(255,105,180,.25) 40px 42px
-    );
-  animation: ekgMove 6s linear infinite;
-  z-index:0;
-}
-@keyframes ekgMove{
-  from{background-position:0 0}
-  to{background-position:400px 0}
-}
-
+/* BLUR */
 .overlay{
   position:fixed;
   inset:0;
-  backdrop-filter:blur(6px);
-  background:rgba(255,182,193,.15);
+  backdrop-filter:blur(10px);
   z-index:1;
 }
 
+/* KART */
 .card{
   position:relative;
   z-index:2;
-  padding:50px 60px 60px;
+  padding:55px 60px 70px;
   border-radius:35px;
   text-align:center;
-  background:linear-gradient(to right,#ffe1eb,#fff5fa);
-  box-shadow:0 25px 60px rgba(255,105,180,.45);
+  background:linear-gradient(135deg,#ffe1ef,#fff);
+  box-shadow:
+    0 25px 60px rgba(255,105,180,.5),
+    inset 0 0 25px rgba(255,255,255,.9);
 }
 
+/* PARLAYAN KENAR */
 .card::before{
   content:"";
   position:absolute;
-  inset:-3px;
-  border-radius:38px;
-  background:linear-gradient(120deg,#ff69b4,#ffb6c1,#ff69b4);
-  filter:blur(8px);
+  inset:-4px;
+  border-radius:40px;
+  background:linear-gradient(120deg,#ff1493,#ffb6c1,#ff1493);
+  filter:blur(10px);
   z-index:-1;
-  animation:borderGlow 3s linear infinite;
+  animation:borderGlow 3s infinite;
 }
+
 @keyframes borderGlow{
   0%{opacity:.6}
   50%{opacity:1}
@@ -74,157 +61,189 @@ body{
 
 h1{
   color:#ff2f92;
-  font-size:32px;
-  text-shadow:0 0 15px rgba(255,105,180,1);
+  font-size:34px;
+  text-shadow:0 0 15px #ff69b4;
 }
 
 p{font-size:20px}
 
 button{
   margin-top:25px;
-  padding:16px 40px;
+  padding:16px 44px;
   font-size:20px;
-  font-weight:bold;
   border:none;
   border-radius:40px;
+  font-weight:bold;
   cursor:pointer;
-  color:white;
   background:linear-gradient(135deg,#ff1493,#ff69b4,#ffb6c1);
-  box-shadow:0 0 30px rgba(255,105,180,.9);
+  color:#fff;
+  box-shadow:0 0 25px #ff69b4;
+  animation:btnPulse 1.6s infinite alternate;
 }
 
-#romanticText{
-  margin-top:25px;
-  z-index:3;
+@keyframes btnPulse{
+  from{box-shadow:0 0 20px #ff69b4}
+  to{box-shadow:0 0 45px #ffb6c1}
+}
+
+/* YAZILAR */
+.romantic-text{
+  position:absolute;
+  bottom:-140px;
+  width:100%;
   text-align:center;
 }
 
 .romantic-line{
-  font-size:28px;
-  color:#ff2f92;
-  text-shadow:0 0 15px rgba(255,105,180,1);
-  animation:fadeIn .8s ease;
+  font-size:30px;
+  color:#ff1493;
+  text-shadow:0 0 15px #ff69b4;
+  animation:fadeIn 1s forwards;
 }
+
 @keyframes fadeIn{
-  from{opacity:0;transform:translateY(10px)}
-  to{opacity:1;transform:none}
+  from{opacity:0;transform:translateY(15px)}
+  to{opacity:1;transform:translateY(0)}
 }
 
+/* FİNAL */
 .big-final{
-  font-size:40px;
+  font-size:52px;
   font-weight:800;
-  animation:finalPulse 1.5s infinite alternate;
-}
-@keyframes finalPulse{
-  from{transform:scale(1)}
-  to{transform:scale(1.07)}
+  animation:pulse 1.4s infinite alternate;
 }
 
+@keyframes pulse{
+  from{transform:scale(1)}
+  to{transform:scale(1.08)}
+}
+
+/* MAVİ AŞK */
 .blue-love{
-  font-size:48px;
-  font-weight:bold;
-  color:#4da6ff;
   margin-top:15px;
-  text-shadow:0 0 30px rgba(77,166,255,1);
-  animation:bluePulse 1.3s infinite alternate;
-}
-@keyframes bluePulse{
-  from{transform:scale(1)}
-  to{transform:scale(1.1)}
+  font-size:50px;
+  color:#4da6ff;
+  text-shadow:0 0 20px #4da6ff;
+  animation:ekg 1.2s infinite;
 }
 
+@keyframes ekg{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.12)}
+  60%{transform:scale(.95)}
+  100%{transform:scale(1)}
+}
+
+/* UÇANLAR */
 .fly,.heart{
   position:fixed;
-  bottom:-30px;
-  animation:flyUp 8s linear forwards;
+  bottom:-40px;
+  animation:flyUp linear forwards;
   pointer-events:none;
 }
-.fly{color:#ff1493;font-weight:bold}
-.heart{color:#ff69b4}
+
+.fly{
+  font-size:18px;
+  color:#ff1493;
+  animation-duration:8s;
+}
+
+.heart{
+  font-size:16px;
+  color:#ff69b4;
+  animation-duration:10s;
+}
 
 @keyframes flyUp{
-  from{transform:translateY(0);opacity:1}
   to{transform:translateY(-120vh);opacity:0}
 }
 </style>
 </head>
 
 <body>
-<div class="ekg"></div>
+
 <div class="overlay"></div>
 
 <div class="card">
   <h1>❤️ GÜZELLER GÜZELİ PRENSESİME ❤️</h1>
-  <p>💙 19.05.2025 💙</p>
-  <button id="startBtn">▶ BAŞLAT</button>
-</div>
+  <p>💙19.05.2025💙</p>
+  <button id="btn">▶ BAŞLAT</button>
 
-<div id="romanticText"></div>
+  <div class="romantic-text" id="text"></div>
+</div>
 
 <audio id="music" src="senden-daha-guzel.mp3"></audio>
 
 <script>
+const btn = document.getElementById("btn");
+const textBox = document.getElementById("text");
+const music = document.getElementById("music");
+
 let running=false;
 let timers=[];
+let flyTimer=null;
 
-function killAll(){
-  timers.forEach(t=>clearTimeout(t));
-  timers=[];
-  running=false;
+const lines=[
+ "Seni sevmek her gün yeniden aşık olmak gibi.",
+ "Gözlerinde huzuru buluyorum.",
+ "Kalbim sadece seninle tamam.",
+ "BUGÜN SENİN GÜNÜN<br>İYİ Kİ DOĞDUN SEVGİLİM 🤍"
+];
+
+function clearAll(){
+ timers.forEach(t=>clearTimeout(t));
+ timers=[];
+ clearTimeout(flyTimer);
 }
 
-function tTimeout(fn,time){
-  const id=setTimeout(fn,time);
-  timers.push(id);
-}
+function start(){
+ running=true;
+ btn.innerText="⏸ DURDUR";
+ textBox.innerHTML="";
+ music.currentTime=0;
+ music.play().catch(()=>{});
 
-document.getElementById("startBtn").onclick=()=>{
-  if(running) return;
-  killAll();
-  running=true;
+ let i=0;
+ function next(){
+  if(!running) return;
 
-  document.getElementById("music").play().catch(()=>{});
-  document.getElementById("romanticText").innerHTML="";
-
-  const lines=[
-    "Seni sevmek tarif edilemez bir his.",
-    "Kalbim seninle tamam.",
-    "Gülüşün en sevdiğim yer.",
-    "BUGÜN SENİN GÜNÜN<br>İYİ Kİ DOĞDUN SEVGİLİM 🤍"
-  ];
-
-  let i=0;
-  function showLine(){
-    if(!running) return;
-
-    if(i===lines.length-1){
-      document.getElementById("romanticText").innerHTML=
-        `<div class="romantic-line big-final">${lines[i]}</div>
-         <div class="blue-love">SENİ ÇOK SEVİYORUM 💙</div>`;
-      running=false;
-      return;
-    }
-
-    document.getElementById("romanticText").innerHTML=
-      `<div class="romantic-line">${lines[i]}</div>`;
-    i++;
-    tTimeout(showLine,3500);
+  if(i===lines.length-1){
+    textBox.innerHTML=`
+      <div class="romantic-line big-final">${lines[i]}</div>
+      <div class="blue-love">SENİ ÇOK SEVİYORUM 💙</div>`;
+    running=false;
+    btn.innerText="▶ BAŞLAT";
+    return;
   }
-  showLine();
 
-  // uçanlar
-  const flyLoop=()=>{
-    if(!running) return;
-    const f=document.createElement("div");
-    f.className="fly";
-    f.innerText="İLKAY 🤍 EMRE";
-    f.style.left=Math.random()*100+"vw";
-    document.body.appendChild(f);
-    setTimeout(()=>f.remove(),8000);
-    tTimeout(flyLoop,1200);
-  };
-  flyLoop();
-};
+  textBox.innerHTML=`<div class="romantic-line">${lines[i]}</div>`;
+  i++;
+  timers.push(setTimeout(next,3500));
+ }
+ next();
+
+ function fly(){
+  if(!running) return;
+  const f=document.createElement("div");
+  f.className="fly";
+  f.innerText="İLKAY 🤍 EMRE";
+  f.style.left=Math.random()*100+"vw";
+  document.body.appendChild(f);
+  setTimeout(()=>f.remove(),8000);
+  flyTimer=setTimeout(fly,1200);
+ }
+ fly();
+}
+
+function stop(){
+ running=false;
+ clearAll();
+ music.pause();
+ btn.innerText="▶ DEVAM ET";
+}
+
+btn.onclick=()=> running ? stop() : start();
 </script>
+
 </body>
 </html>
