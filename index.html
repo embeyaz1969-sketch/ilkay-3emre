@@ -1,136 +1,283 @@
-<!DOCTYPE html><html lang="tr">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <title>Ilkay Emre</title>
+
 <style>
 *{box-sizing:border-box}
+
 body{
-  margin:0;height:100vh;overflow:hidden;
-  font-family:Arial,sans-serif;
-  display:flex;justify-content:center;align-items:center;
-  background:linear-gradient(rgba(255,182,193,.25),rgba(255,182,193,.25)),url("IMG-20251117-WA0008.jpg") no-repeat center/cover
+margin:0;
+height:100vh;
+overflow:hidden;
+font-family:Arial,sans-serif;
+display:flex;
+justify-content:center;
+align-items:center;
+background:
+linear-gradient(rgba(255,182,193,.25),rgba(255,182,193,.25)),
+url("IMG-20251117-WA0008.jpg") center/cover no-repeat;
 }
-.overlay{position:fixed;inset:0;backdrop-filter:blur(8px);background:rgba(255,182,193,.15);z-index:1}
+
+/* 💓 EKG ARKA PLAN */
+.ekg{
+position:fixed;
+inset:0;
+background:
+repeating-linear-gradient(
+90deg,
+transparent 0,
+transparent 40px,
+rgba(255,105,180,.35) 42px,
+transparent 44px
+);
+animation:ekgMove 6s linear infinite;
+opacity:.35;
+z-index:0;
+}
+
+@keyframes ekgMove{
+from{background-position:0 0}
+to{background-position:100% 0}
+}
+
+.overlay{
+position:fixed;
+inset:0;
+backdrop-filter:blur(8px);
+background:rgba(255,182,193,.15);
+z-index:1;
+}
+
 .card{
-  position:relative;z-index:2;
-  padding:55px 55px 70px;
-  border-radius:35px;
-  text-align:center;
-  background:linear-gradient(135deg,rgba(255,200,220,.98),rgba(255,240,250,.98));
-  box-shadow:0 25px 60px rgba(255,105,180,.45),inset 0 0 30px rgba(255,255,255,.7)
+position:relative;
+z-index:2;
+padding:55px 55px 70px;
+border-radius:35px;
+text-align:center;
+background:linear-gradient(135deg,#ffd0e4,#fff0fa,#ffd9ee);
+box-shadow:
+0 25px 60px rgba(255,105,180,.45),
+0 0 40px rgba(255,182,193,.6);
 }
+
 .card::before{
-  content:"";position:absolute;inset:-3px;border-radius:38px;
-  background:linear-gradient(120deg,#ff69b4,#ffb6c1,#ff69b4);
-  filter:blur(8px);z-index:-1;animation:borderGlow 3s linear infinite
+content:"";
+position:absolute;
+inset:-4px;
+border-radius:40px;
+background:linear-gradient(120deg,#ff69b4,#ffb6c1,#ff69b4);
+filter:blur(12px);
+z-index:-1;
+animation:borderGlow 3s infinite;
 }
-@keyframes borderGlow{0%{opacity:.6}50%{opacity:1}100%{opacity:.6}}
-.card::after{
-  content:"İLKAY❤️EMRE";position:absolute;bottom:10px;left:0;right:0;
-  font-size:14px;opacity:.35
+
+@keyframes borderGlow{
+0%{opacity:.5}
+50%{opacity:1}
+100%{opacity:.5}
 }
-h1{color:#ff2f92;font-size:34px;text-shadow:0 0 15px rgba(255,105,180,1)}
-p{font-size:20px}
+
+h1{
+color:#ff2f92;
+font-size:34px;
+text-shadow:0 0 20px #ff69b4;
+}
+
 button{
-  margin-top:25px;padding:16px 40px;font-size:20px;font-weight:bold;
-  border:none;border-radius:40px;cursor:pointer;color:white;
-  background:linear-gradient(135deg,#ff1493,#ff69b4,#ffb6c1);
-  box-shadow:0 0 25px rgba(255,105,180,.9);
-  animation:buttonGlow 1.6s infinite alternate
+margin-top:25px;
+padding:16px 42px;
+font-size:20px;
+font-weight:bold;
+border:none;
+border-radius:40px;
+cursor:pointer;
+color:white;
+background:linear-gradient(135deg,#ff1493,#ff69b4,#ffb6c1);
+box-shadow:0 0 35px rgba(255,105,180,1);
+animation:btnPulse 1.5s infinite alternate;
 }
-@keyframes buttonGlow{from{box-shadow:0 0 15px rgba(255,105,180,.8)}to{box-shadow:0 0 40px rgba(255,182,193,1)}}
-.romantic-text{position:absolute;top:65%;z-index:5;text-align:center}
-.romantic-line{font-size:30px;color:#ff2f92;opacity:0;transition:.6s}
-.big-final{font-size:46px;font-weight:800;opacity:1}
+
+@keyframes btnPulse{
+to{transform:scale(1.08)}
+}
+
+.romantic-text{
+position:absolute;
+top:calc(50% + 170px);
+display:flex;
+flex-direction:column;
+align-items:center;
+z-index:3;
+}
+
+.romantic-line{
+font-size:28px;
+color:#ff2f92;
+margin-top:18px;
+text-shadow:0 0 15px rgba(255,105,180,1);
+opacity:0;
+animation:fadeIn 1s forwards;
+}
+
+@keyframes fadeIn{to{opacity:1}}
+
+.big-final{
+font-size:44px;
+font-weight:bold;
+animation:megaGlow 1.4s infinite alternate;
+}
+
+@keyframes megaGlow{
+to{transform:scale(1.08)}
+}
+
 .love-message{
-  position:fixed;top:15%;left:50%;transform:translateX(-50%);
-  font-size:46px;font-weight:bold;opacity:0;
-  background:linear-gradient(45deg,#ff1493,#ff69b4);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  animation:heartPulse 1.3s infinite alternate
+position:fixed;
+top:70px;
+left:50%;
+transform:translateX(-50%);
+font-size:46px;
+font-weight:bold;
+color:#ff69b4;
+text-shadow:0 0 30px #ff69b4;
+animation:heartBeat 1.3s infinite;
+z-index:10;
 }
-@keyframes heartPulse{from{transform:translateX(-50%) scale(1)}to{transform:translateX(-50%) scale(1.08)}}
+
+@keyframes heartBeat{
+to{transform:translateX(-50%) scale(1.1)}
+}
+
 .blue-love{
-  margin-top:20px;font-size:52px;font-weight:bold;color:#4da6ff;
-  text-shadow:0 0 25px rgba(77,166,255,1);
-  animation:bluePulse 1.2s infinite alternate
+margin-top:20px;
+font-size:50px;
+font-weight:bold;
+color:#4da6ff;
+text-shadow:0 0 35px rgba(77,166,255,1);
+animation:bluePulse 1.2s infinite alternate;
 }
-@keyframes bluePulse{from{transform:scale(1)}to{transform:scale(1.1)}}
-.fly,.heart{position:fixed;bottom:-20px;pointer-events:none;animation:flyUp 8s linear forwards}
-@keyframes flyUp{to{transform:translateY(-120vh);opacity:0}}
+
+@keyframes bluePulse{
+to{transform:scale(1.12)}
+}
+
+/* 💕 UÇAN YAZI */
+.fly{
+position:fixed;
+bottom:-40px;
+font-size:18px;
+font-weight:bold;
+color:#ff69b4;
+filter:blur(2px);
+text-shadow:0 0 15px rgba(255,105,180,1);
+animation:flyUp 9s linear forwards;
+pointer-events:none;
+z-index:2;
+}
+
+/* 💖 UÇAN KALP */
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:18px;
+color:#ff69b4;
+filter:blur(2px);
+text-shadow:0 0 15px rgba(255,182,193,1);
+animation:flyUp 11s linear forwards;
+pointer-events:none;
+z-index:2;
+}
+
+@keyframes flyUp{
+to{transform:translateY(-120vh);opacity:0}
+}
 </style>
 </head>
+
 <body>
+<div class="ekg"></div>
 <div class="overlay"></div>
+
 <div class="card">
-  <h1>❤️ GÜZELLER GÜZELİ PRENSESİME ❤️</h1>
-  <p>💙19.05.2025💙</p>
-  <button id="btn">💖 BAŞLAT 💖</button>
+<h1>❤️ GÜZELLER GÜZELİ PRENSESİME ❤️</h1>
+<p>💙19.05.2025💙</p>
+<button onclick="startAll()">💖 BAŞLAT 💖</button>
 </div>
+
 <div class="romantic-text" id="romanticText"></div>
-<audio id="music" src="senden-daha-guzel.mp3"></audio><script>
-let started=false,paused=false;
-let flyInterval,heartInterval,textInterval;
+
+<audio id="music" src="senden-daha-guzel.mp3"></audio>
+
+<script>
+let started=false;
 const lines=[
-"Seni sevmek her gün biraz daha bağlanmak gibi",
-"Gözlerine bakınca dünya sakinleşiyor",
-"Yanımda olman kalbime en güzel huzur",
-"BUGÜN SENİN GÜNÜN\nİYİ Kİ DOĞDUN SEVGİLİM"
+"Seni sevmek, her gün biraz daha bağlanmak gibi.",
+"Gözlerine bakınca dünya sakinleşiyor.",
+"Yanımda olman kalbime en güzel huzur."
 ];
-const btn=document.getElementById("btn");
-const music=document.getElementById("music");
-btn.onclick=()=>{
-  if(!started){start();btn.innerText="⏸ DURDUR";started=true;return}
-  paused=!paused;
-  if(paused){stop();btn.innerText="▶ DEVAM ET"}
-  else{resume();btn.innerText="⏸ DURDUR"}
+
+function startAll(){
+if(started) return;
+started=true;
+document.getElementById("music").play().catch(()=>{});
+
+setInterval(()=>{
+const t=document.createElement("div");
+t.className="fly";
+t.innerText="İLKAY 🤍 EMRE";
+t.style.left=Math.random()*100+"vw";
+document.body.appendChild(t);
+setTimeout(()=>t.remove(),9000);
+},900);
+
+setInterval(()=>{
+const h=document.createElement("div");
+h.className="heart";
+h.innerText="💖";
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=14+Math.random()*18+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),11000);
+},700);
+
+const box=document.getElementById("romanticText");
+let i=0;
+
+const interval=setInterval(()=>{
+if(i>=lines.length){
+clearInterval(interval);
+
+const final=document.createElement("div");
+final.className="romantic-line big-final";
+final.innerText="BUGÜN SENİN GÜNÜN\nİYİ Kİ DOĞDUN SEVGİLİM 🤍";
+box.appendChild(final);
+
+setTimeout(()=>{
+const love=document.createElement("div");
+love.className="love-message";
+love.innerText="🤍 İYİ Kİ SEN SEVGİLİM 🤍";
+document.body.appendChild(love);
+
+setTimeout(()=>{
+const blue=document.createElement("div");
+blue.className="blue-love";
+blue.innerText="SENİ ÇOK SEVİYORUM 💙";
+box.appendChild(blue);
+},3000);
+
+},3000);
+return;
 }
-function start(){
-  music.play().catch(()=>{});
-  spawn();
-  showText();
+
+const d=document.createElement("div");
+d.className="romantic-line";
+d.innerText=lines[i];
+box.appendChild(d);
+i++;
+},3500);
 }
-function stop(){
-  music.pause();clearInterval(flyInterval);clearInterval(heartInterval);clearInterval(textInterval)
-}
-function resume(){start()}
-function spawn(){
-  flyInterval=setInterval(()=>{
-    const d=document.createElement("div");
-    d.className="fly";d.innerText="İLKAY🤍EMRE";
-    d.style.left=Math.random()*100+"vw";
-    document.body.appendChild(d);setTimeout(()=>d.remove(),8000)
-  },900);
-  heartInterval=setInterval(()=>{
-    const h=document.createElement("div");
-    h.className="heart";h.innerText="🤍";
-    h.style.left=Math.random()*100+"vw";
-    document.body.appendChild(h);setTimeout(()=>h.remove(),8000)
-  },700);
-}
-function showText(){
-  const box=document.getElementById("romanticText");box.innerHTML="";
-  let i=0;
-  textInterval=setInterval(()=>{
-    if(i>=lines.length){clearInterval(textInterval);finale();return}
-    const d=document.createElement("div");
-    d.className="romantic-line";
-    d.innerText=lines[i];box.appendChild(d);
-    requestAnimationFrame(()=>d.style.opacity=1);
-    i++;
-  },3000);
-}
-function finale(){
-  setTimeout(()=>{
-    const top=document.createElement("div");
-    top.className="love-message";top.innerText="İYİ Kİ SEN SEVGİLİM";
-    document.body.appendChild(top);top.style.opacity=1;
-    setTimeout(()=>{
-      const blue=document.createElement("div");
-      blue.className="blue-love";blue.innerText="SENİ ÇOK SEVİYORUM💙";
-      document.getElementById("romanticText").appendChild(blue)
-    },3000);
-  },3000);
-}
-</script></body>
+</script>
+</body>
 </html>
