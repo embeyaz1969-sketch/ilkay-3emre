@@ -31,6 +31,10 @@ button { margin-top: 20px; padding: 14px 34px; font-size: 18px; border: none; bo
 
 @keyframes heartPulse { 0% { transform: translateX(-50%) scale(1); opacity: 0.85; } 100% { transform: translateX(-50%) scale(1.08); opacity: 1; } }
 
+/* 💙 MAVİ BÜYÜK AŞK YAZISI */ .blue-love { margin-top: 20px; font-size: 50px; font-weight: bold; color: #4da6ff; text-shadow: 0 0 15px rgba(77,166,255,0.9), 0 0 30px rgba(77,166,255,0.9), 0 0 50px rgba(77,166,255,1); animation: bluePulse 1.3s infinite alternate; opacity: 0; }
+
+@keyframes bluePulse { 0% { transform: scale(1); opacity: 0.85; } 100% { transform: scale(1.1); opacity: 1; } } 100% { transform: translateX(-50%) scale(1.08); opacity: 1; } }
+
 .fly { position: fixed; bottom: -40px; font-size: 18px; font-weight: bold; color: #ff1493; animation: flyUp 8s linear forwards; pointer-events: none; z-index: 3; }
 
 .heart { position: fixed; bottom: -20px; font-size: 16px; color: #ff69b4; animation: flyUp 10s linear forwards; pointer-events: none; z-index: 2; }
@@ -96,8 +100,17 @@ function startRomanticText() {
         const loveMsg = document.createElement('div');
         loveMsg.className = 'love-message';
         loveMsg.innerText = '🤍İYİ Kİ SEN SEVGİLİM🤍';
-        document.querySelector('.card').appendChild(loveMsg);
+        document.body.appendChild(loveMsg);
         loveMsg.style.opacity = 1;
+
+        // 3 saniye sonra mavi büyük mesaj
+        setTimeout(() => {
+          const blueLove = document.createElement('div');
+          blueLove.className = 'blue-love';
+          blueLove.innerText = 'SENİ ÇOK SEVİYORUM💙';
+          document.getElementById('romanticText').appendChild(blueLove);
+          blueLove.style.opacity = 1;
+        }, 3000);
       }, 3000);
 
       startCardHeartsInfinite();
