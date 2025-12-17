@@ -20,6 +20,28 @@ body{
     url("IMG-20251117-WA0008.jpg") center/cover no-repeat;
 }
 
+/* EKG ARKA PLAN */
+.ekg{
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(90deg,
+      transparent 0%,
+      transparent 45%,
+      rgba(77,166,255,.8) 50%,
+      transparent 55%,
+      transparent 100%);
+  background-size:300px 100%;
+  animation:ekgMove 2s linear infinite;
+  opacity:.25;
+  z-index:0;
+}
+
+@keyframes ekgMove{
+  from{background-position:0 0}
+  to{background-position:300px 0}
+}
+
 /* BLUR */
 .overlay{
   position:fixed;
@@ -32,7 +54,7 @@ body{
 .card{
   position:relative;
   z-index:2;
-  padding:55px 60px 70px;
+  padding:55px 60px 80px;
   border-radius:35px;
   text-align:center;
   background:linear-gradient(135deg,#ffe1ef,#fff);
@@ -89,7 +111,7 @@ button{
 /* YAZILAR */
 .romantic-text{
   position:absolute;
-  bottom:-140px;
+  bottom:-150px;
   width:100%;
   text-align:center;
 }
@@ -118,16 +140,32 @@ button{
   to{transform:scale(1.08)}
 }
 
+/* ÜST AŞK YAZISI */
+.love-top{
+  position:fixed;
+  top:12%;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:48px;
+  font-weight:bold;
+  color:#fff;
+  text-shadow:
+    0 0 20px #ff69b4,
+    0 0 40px #ff1493;
+  animation:pulse 1.4s infinite alternate;
+  z-index:3;
+}
+
 /* MAVİ AŞK */
 .blue-love{
-  margin-top:15px;
+  margin-top:18px;
   font-size:50px;
   color:#4da6ff;
   text-shadow:0 0 20px #4da6ff;
-  animation:ekg 1.2s infinite;
+  animation:ekgPulse 1.2s infinite;
 }
 
-@keyframes ekg{
+@keyframes ekgPulse{
   0%{transform:scale(1)}
   40%{transform:scale(1.12)}
   60%{transform:scale(.95)}
@@ -162,13 +200,13 @@ button{
 
 <body>
 
+<div class="ekg"></div>
 <div class="overlay"></div>
 
 <div class="card">
   <h1>❤️ GÜZELLER GÜZELİ PRENSESİME ❤️</h1>
   <p>💙19.05.2025💙</p>
   <button id="btn">▶ BAŞLAT</button>
-
   <div class="romantic-text" id="text"></div>
 </div>
 
@@ -200,6 +238,7 @@ function start(){
  running=true;
  btn.innerText="⏸ DURDUR";
  textBox.innerHTML="";
+ document.querySelectorAll('.love-top').forEach(e=>e.remove());
  music.currentTime=0;
  music.play().catch(()=>{});
 
@@ -211,6 +250,14 @@ function start(){
     textBox.innerHTML=`
       <div class="romantic-line big-final">${lines[i]}</div>
       <div class="blue-love">SENİ ÇOK SEVİYORUM 💙</div>`;
+
+    setTimeout(()=>{
+      const top=document.createElement("div");
+      top.className="love-top";
+      top.innerText="🤍 İYİ Kİ SEN SEVGİLİM 🤍";
+      document.body.appendChild(top);
+    },3000);
+
     running=false;
     btn.innerText="▶ BAŞLAT";
     return;
