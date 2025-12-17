@@ -47,7 +47,7 @@ body {
 
 /* Kart köşe kalpleri */
 .card::before {
-  content: "💚😘💚";
+  content: "😘";
   position: absolute;
   top: 15px;
   left: 15px;
@@ -89,7 +89,7 @@ button {
 
 /* 🌸 ROMANTİK YAZILAR */
 .romantic-line {
-  font-size: 28px; /* tüm cümleler büyük ve parlak */
+  font-size: 28px;
   color: #e91e63;
   text-align: center;
   margin-top: 18px;
@@ -98,6 +98,8 @@ button {
     0 0 18px rgba(255,182,193,1);
   z-index: 2;
   filter: none; /* blur kaldırıldı */
+  opacity: 0;
+  transition: opacity 0.6s ease;
 }
 
 /* 🌟 SON CÜMLE */
@@ -111,8 +113,10 @@ button {
     0 0 50px rgba(255,105,180,1);
   animation: megaGlow 1.6s infinite alternate;
   filter: none; /* blur kaldırıldı */
+  opacity: 1;
 }
 
+/* Nabız animasyonu */
 @keyframes megaGlow {
   0% { transform: scale(1); opacity: 0.85; }
   100% { transform: scale(1.08); opacity: 1; }
@@ -147,7 +151,6 @@ button {
 }
 </style>
 </head>
-
 <body>
 
 <div class="overlay"></div>
@@ -172,7 +175,7 @@ const romanticLines = [
 ];
 
 function startAll() {
-  if (started) return;
+  if(started) return;
   started = true;
 
   document.getElementById("music").play();
@@ -213,18 +216,22 @@ function startRomanticText() {
       lastDiv.className = "romantic-line big-final";
       lastDiv.innerHTML = romanticLines[i];
       box.appendChild(lastDiv);
-      startCardHeartsInfinite(); // kart etrafı kalpler sürekli
+      startCardHeartsInfinite();
       clearInterval(interval);
       return;
     }
 
-    // Diğer cümleler
+    // Diğer cümleler: görünür ol ve 3 saniye sonra kaybol
     const div = document.createElement("div");
     div.className = "romantic-line";
     div.innerHTML = romanticLines[i];
     box.appendChild(div);
+    setTimeout(() => {
+      div.style.opacity = 0;
+      setTimeout(() => div.remove(), 600);
+    }, 3000);
     i++;
-  }, 3000);
+  }, 3500);
 }
 
 // Kart etrafında kalpler (son cümle için sonsuz)
@@ -243,5 +250,6 @@ function startCardHeartsInfinite() {
   }, 200);
 }
 </script>
+
 </body>
 </html>
